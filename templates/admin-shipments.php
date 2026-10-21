@@ -66,22 +66,22 @@ if (!defined('ABSPATH')) {
     </div>
 
     <!-- Shipments Table -->
-    <div class="ipw-table-wrapper">
-        <table class="wp-list-table widefat fixed striped">
+    <div class="ipw-table-wrapper ipw-table-responsive">
+        <table class="wp-list-table widefat striped ipw-admin-table">
             <thead>
                 <tr>
                     <th class="check-column" style="width:36px; text-align:center; padding:8px 0;">
                         <input type="checkbox" id="ipw-cb-select-all-shipments" title="<?php esc_attr_e('Select All', 'india-post-woocommerce'); ?>">
                     </th>
-                    <th style="width:160px;"><?php esc_html_e('AWB Barcode', 'india-post-woocommerce'); ?></th>
-                    <th style="width:90px;"><?php esc_html_e('Order #', 'india-post-woocommerce'); ?></th>
-                    <th><?php esc_html_e('Customer / Destination', 'india-post-woocommerce'); ?></th>
-                    <th style="width:140px;"><?php esc_html_e('Article Type', 'india-post-woocommerce'); ?></th>
-                    <th style="width:90px;"><?php esc_html_e('Weight', 'india-post-woocommerce'); ?></th>
-                    <th style="width:90px;"><?php esc_html_e('Tariff', 'india-post-woocommerce'); ?></th>
-                    <th style="width:130px;"><?php esc_html_e('Status', 'india-post-woocommerce'); ?></th>
-                    <th style="width:140px;"><?php esc_html_e('Last Tracked', 'india-post-woocommerce'); ?></th>
-                    <th style="width:190px;"><?php esc_html_e('Actions', 'india-post-woocommerce'); ?></th>
+                    <th style="min-width:145px;"><?php esc_html_e('AWB Barcode', 'india-post-woocommerce'); ?></th>
+                    <th style="min-width:75px;"><?php esc_html_e('Order #', 'india-post-woocommerce'); ?></th>
+                    <th style="min-width:180px;"><?php esc_html_e('Customer / Destination', 'india-post-woocommerce'); ?></th>
+                    <th style="min-width:125px;"><?php esc_html_e('Article Type', 'india-post-woocommerce'); ?></th>
+                    <th style="min-width:70px;"><?php esc_html_e('Weight', 'india-post-woocommerce'); ?></th>
+                    <th style="min-width:70px;"><?php esc_html_e('Tariff', 'india-post-woocommerce'); ?></th>
+                    <th style="min-width:150px;"><?php esc_html_e('Status', 'india-post-woocommerce'); ?></th>
+                    <th style="min-width:110px;"><?php esc_html_e('Last Tracked', 'india-post-woocommerce'); ?></th>
+                    <th style="min-width:160px; text-align:right;"><?php esc_html_e('Actions', 'india-post-woocommerce'); ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -112,7 +112,7 @@ if (!defined('ABSPATH')) {
                                     #<?php echo esc_html($sh->order_id); ?>
                                 </a>
                             </td>
-                            <td>
+                            <td class="col-allow-wrap">
                                 <strong><?php echo esc_html($recipient); ?></strong>
                                 <?php if ($dest_pin) : ?>
                                     <div class="ipw-small-pin">PIN: <?php echo esc_html($dest_pin); ?></div>
@@ -141,9 +141,9 @@ if (!defined('ABSPATH')) {
                                     <?php echo esc_html($sh->last_tracked_at ? human_time_diff(strtotime($sh->last_tracked_at)) . ' ago' : 'Never'); ?>
                                 </span>
                             </td>
-                            <td>
+                            <td style="text-align:right;">
                                 <div class="ipw-row-actions">
-                                    <a href="<?php echo esc_url($print_sheet); ?>" target="_blank" class="button button-small" title="<?php esc_attr_e('Print Label in A4 Sheet (4 per Page)', 'india-post-woocommerce'); ?>">📄 <?php esc_html_e('A4 Sheet', 'india-post-woocommerce'); ?></a>
+                                    <a href="<?php echo esc_url($print_sheet); ?>" target="_blank" class="button button-small" title="<?php esc_attr_e('Print Label in A6 Sheet (4 per Sheet)', 'india-post-woocommerce'); ?>">📄 <?php esc_html_e('A6 Sheet', 'india-post-woocommerce'); ?></a>
                                     <a href="<?php echo esc_url($print_thermal); ?>" target="_blank" class="button button-small" title="<?php esc_attr_e('Print Thermal Label', 'india-post-woocommerce'); ?>">🏷️ <?php esc_html_e('Thermal', 'india-post-woocommerce'); ?></a>
                                     <button type="button" class="button button-small ipw-btn-refresh-row" data-order-id="<?php echo esc_attr($sh->order_id); ?>" title="<?php esc_attr_e('Sync Live Tracking', 'india-post-woocommerce'); ?>">🔄</button>
                                 </div>

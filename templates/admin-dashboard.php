@@ -237,18 +237,19 @@ $token_class  = !empty($token) ? 'status-active' : 'status-pending';
                 </div>
 
                 <?php if (!empty($unbooked_orders)) : ?>
-                    <table class="wp-list-table widefat fixed striped ipw-admin-table">
-                        <thead>
-                            <tr>
-                                <th style="width:100px;"><?php esc_html_e('Order', 'india-post-woocommerce'); ?></th>
-                                <th><?php esc_html_e('Customer / Recipient', 'india-post-woocommerce'); ?></th>
-                                <th><?php esc_html_e('Destination PIN', 'india-post-woocommerce'); ?></th>
-                                <th><?php esc_html_e('Order Total', 'india-post-woocommerce'); ?></th>
-                                <th><?php esc_html_e('Payment', 'india-post-woocommerce'); ?></th>
-                                <th style="width:180px;"><?php esc_html_e('Quick Action', 'india-post-woocommerce'); ?></th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                    <div class="ipw-table-responsive">
+                        <table class="wp-list-table widefat striped ipw-admin-table">
+                            <thead>
+                                <tr>
+                                    <th style="min-width:80px;"><?php esc_html_e('Order', 'india-post-woocommerce'); ?></th>
+                                    <th style="min-width:160px;"><?php esc_html_e('Customer / Recipient', 'india-post-woocommerce'); ?></th>
+                                    <th style="min-width:110px;"><?php esc_html_e('Destination PIN', 'india-post-woocommerce'); ?></th>
+                                    <th style="min-width:90px;"><?php esc_html_e('Order Total', 'india-post-woocommerce'); ?></th>
+                                    <th style="min-width:80px;"><?php esc_html_e('Payment', 'india-post-woocommerce'); ?></th>
+                                    <th style="min-width:130px; text-align:right;"><?php esc_html_e('Quick Action', 'india-post-woocommerce'); ?></th>
+                                </tr>
+                            </thead>
+                            <tbody>
                             <?php foreach ($unbooked_orders as $ord) : ?>
                                 <tr>
                                     <td><strong><a href="<?php echo esc_url($ord->get_edit_order_url()); ?>">#<?php echo esc_html($ord->get_order_number()); ?></a></strong></td>
@@ -274,6 +275,7 @@ $token_class  = !empty($token) ? 'status-active' : 'status-pending';
                             <?php endforeach; ?>
                         </tbody>
                     </table>
+                    </div>
                 <?php else : ?>
                     <p style="padding:15px; color:#64748b; font-style:italic;">
                         <?php esc_html_e('All current WooCommerce orders have been booked with India Post!', 'india-post-woocommerce'); ?>
@@ -297,55 +299,59 @@ $token_class  = !empty($token) ? 'status-active' : 'status-pending';
                 </div>
 
                 <?php if (!empty($recent_shipments)) : ?>
-                    <table class="wp-list-table widefat fixed striped ipw-admin-table">
-                        <thead>
-                            <tr>
-                                <th class="check-column" style="width:34px; text-align:center; padding:8px 0;">
-                                    <input type="checkbox" id="ipw-cb-dash-select-all" title="<?php esc_attr_e('Select All', 'india-post-woocommerce'); ?>">
-                                </th>
-                                <th style="width:160px;"><?php esc_html_e('AWB Barcode', 'india-post-woocommerce'); ?></th>
-                                <th style="width:85px;"><?php esc_html_e('Order #', 'india-post-woocommerce'); ?></th>
-                                <th style="width:140px;"><?php esc_html_e('Article Type', 'india-post-woocommerce'); ?></th>
-                                <th style="width:80px;"><?php esc_html_e('Weight', 'india-post-woocommerce'); ?></th>
-                                <th style="width:80px;"><?php esc_html_e('Tariff', 'india-post-woocommerce'); ?></th>
-                                <th style="width:210px;"><?php esc_html_e('Delivery Status', 'india-post-woocommerce'); ?></th>
-                                <th style="width:160px; text-align:right;"><?php esc_html_e('Actions', 'india-post-woocommerce'); ?></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($recent_shipments as $sh) :
-                                $print_thermal = wp_nonce_url(
-                                    admin_url('admin.php?action=ipw_print_label&order_id=' . $sh->order_id . '&format=thermal'),
-                                    'ipw_print_label_' . $sh->order_id
-                                );
-                                $print_sheet = wp_nonce_url(
-                                    admin_url('admin.php?action=ipw_print_label&order_id=' . $sh->order_id . '&format=sheet'),
-                                    'ipw_print_label_' . $sh->order_id
-                                );
-                                $sh_t = strtoupper(trim((string)$sh->article_type));
-                                $sh_svc = ($sh_t === 'BUSINESS_PARCEL' || strpos($sh_t, 'BP') !== false || $sh_t === 'PARCEL') ? 'Business Parcel' : (($sh_t === 'SP_INLAND_PARCEL') ? 'Speed Post Parcel' : 'Speed Post');
-                                $st = strtolower($sh->delivery_status);
-                                $st_label = ($st === 'booked' || empty($st)) ? '📦 BOOKED (AWAITING PICKUP)' : (($st === 'in_transit') ? '🚚 IN TRANSIT' : (($st === 'out_for_delivery') ? '🛵 OUT FOR DELIVERY' : (($st === 'delivered') ? '✅ DELIVERED' : str_replace('_', ' ', strtoupper($sh->delivery_status)))));
-                            ?>
+                    <div class="ipw-table-responsive">
+                        <table class="wp-list-table widefat striped ipw-admin-table">
+                            <thead>
                                 <tr>
-                                    <td style="text-align:center; padding:8px 0;">
-                                        <input type="checkbox" class="ipw-dash-row-cb" value="<?php echo esc_attr($sh->order_id); ?>">
-                                    </td>
-                                    <td><strong class="font-mono"><?php echo esc_html($sh->barcode_no); ?></strong></td>
-                                    <td><a href="<?php echo esc_url(admin_url('post.php?post=' . $sh->order_id . '&action=edit')); ?>">#<?php echo esc_html($sh->order_id); ?></a></td>
-                                    <td><span class="ipw-type-pill"><?php echo esc_html($sh_svc); ?></span></td>
-                                    <td><?php echo esc_html($sh->physical_weight); ?>g</td>
-                                    <td>₹<?php echo esc_html(number_format($sh->tariff, 2)); ?></td>
-                                    <td><span class="ipw-status-pill status-<?php echo esc_attr(sanitize_html_class($sh->delivery_status)); ?>"><?php echo esc_html($st_label); ?></span></td>
-                                    <td style="text-align:right;">
-                                        <a href="<?php echo esc_url($print_sheet); ?>" target="_blank" class="button button-small" title="<?php esc_attr_e('Print in A4 Sheet (4 per Page)', 'india-post-woocommerce'); ?>">📄 Sheet</a>
-                                        <a href="<?php echo esc_url($print_thermal); ?>" target="_blank" class="button button-small" title="<?php esc_attr_e('Print Thermal Label', 'india-post-woocommerce'); ?>">🏷️</a>
-                                        <button type="button" class="button button-small ipw-btn-refresh-row" data-order-id="<?php echo esc_attr($sh->order_id); ?>">🔄</button>
-                                    </td>
+                                    <th class="check-column" style="width:34px; text-align:center; padding:8px 0;">
+                                        <input type="checkbox" id="ipw-cb-dash-select-all" title="<?php esc_attr_e('Select All', 'india-post-woocommerce'); ?>">
+                                    </th>
+                                    <th style="min-width:145px;"><?php esc_html_e('AWB Barcode', 'india-post-woocommerce'); ?></th>
+                                    <th style="min-width:75px;"><?php esc_html_e('Order #', 'india-post-woocommerce'); ?></th>
+                                    <th style="min-width:125px;"><?php esc_html_e('Article Type', 'india-post-woocommerce'); ?></th>
+                                    <th style="min-width:70px;"><?php esc_html_e('Weight', 'india-post-woocommerce'); ?></th>
+                                    <th style="min-width:70px;"><?php esc_html_e('Tariff', 'india-post-woocommerce'); ?></th>
+                                    <th style="min-width:170px;"><?php esc_html_e('Delivery Status', 'india-post-woocommerce'); ?></th>
+                                    <th style="min-width:140px; text-align:right;"><?php esc_html_e('Actions', 'india-post-woocommerce'); ?></th>
                                 </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($recent_shipments as $sh) :
+                                    $print_thermal = wp_nonce_url(
+                                        admin_url('admin.php?action=ipw_print_label&order_id=' . $sh->order_id . '&format=thermal'),
+                                        'ipw_print_label_' . $sh->order_id
+                                    );
+                                    $print_sheet = wp_nonce_url(
+                                        admin_url('admin.php?action=ipw_print_label&order_id=' . $sh->order_id . '&format=sheet'),
+                                        'ipw_print_label_' . $sh->order_id
+                                    );
+                                    $sh_t = strtoupper(trim((string)$sh->article_type));
+                                    $sh_svc = ($sh_t === 'BUSINESS_PARCEL' || strpos($sh_t, 'BP') !== false || $sh_t === 'PARCEL') ? 'Business Parcel' : (($sh_t === 'SP_INLAND_PARCEL') ? 'Speed Post Parcel' : 'Speed Post');
+                                    $st = strtolower($sh->delivery_status);
+                                    $st_label = ($st === 'booked' || empty($st)) ? '📦 BOOKED (AWAITING PICKUP)' : (($st === 'in_transit') ? '🚚 IN TRANSIT' : (($st === 'out_for_delivery') ? '🛵 OUT FOR DELIVERY' : (($st === 'delivered') ? '✅ DELIVERED' : str_replace('_', ' ', strtoupper($sh->delivery_status)))));
+                                ?>
+                                    <tr>
+                                        <td style="text-align:center; padding:8px 0;">
+                                            <input type="checkbox" class="ipw-dash-row-cb" value="<?php echo esc_attr($sh->order_id); ?>">
+                                        </td>
+                                        <td><strong class="font-mono"><?php echo esc_html($sh->barcode_no); ?></strong></td>
+                                        <td><a href="<?php echo esc_url(admin_url('post.php?post=' . $sh->order_id . '&action=edit')); ?>">#<?php echo esc_html($sh->order_id); ?></a></td>
+                                        <td><span class="ipw-type-pill"><?php echo esc_html($sh_svc); ?></span></td>
+                                        <td><?php echo esc_html($sh->physical_weight); ?>g</td>
+                                        <td>₹<?php echo esc_html(number_format($sh->tariff, 2)); ?></td>
+                                        <td><span class="ipw-status-pill status-<?php echo esc_attr(sanitize_html_class($sh->delivery_status)); ?>"><?php echo esc_html($st_label); ?></span></td>
+                                        <td style="text-align:right;">
+                                            <div class="ipw-row-actions">
+                                                <a href="<?php echo esc_url($print_sheet); ?>" target="_blank" class="button button-small" title="<?php esc_attr_e('Print A6 Sheet (4 per Sheet)', 'india-post-woocommerce'); ?>">📄 Sheet</a>
+                                                <a href="<?php echo esc_url($print_thermal); ?>" target="_blank" class="button button-small" title="<?php esc_attr_e('Print Thermal Label', 'india-post-woocommerce'); ?>">🏷️</a>
+                                                <button type="button" class="button button-small ipw-btn-refresh-row" data-order-id="<?php echo esc_attr($sh->order_id); ?>" title="<?php esc_attr_e('Sync Live Tracking', 'india-post-woocommerce'); ?>">🔄</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
                 <?php else : ?>
                     <p style="padding:15px; color:#64748b; font-style:italic;">
                         <?php esc_html_e('No consignments booked yet. Select an order to generate your first India Post shipment.', 'india-post-woocommerce'); ?>

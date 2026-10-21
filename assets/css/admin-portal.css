@@ -200,7 +200,9 @@
     flex-grow: 1;
     background: #f8fafc;
     padding: 24px 28px;
-    overflow-x: hidden;
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 /* Status Banner */
@@ -465,24 +467,49 @@
     overflow: hidden;
 }
 
-.ipw-section-header {
-    background: #fafbfc;
-    padding: 14px 20px;
-    border-bottom: 1px solid #e2e8f0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.ipw-table-responsive,
+.ipw-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: 0;
 }
 
-.ipw-section-header h3 {
-    margin: 0;
-    font-size: 14px;
-    font-weight: 700;
-    color: #1e293b;
+.ipw-admin-table {
+    width: 100% !important;
+    table-layout: auto !important;
+    border-collapse: collapse;
 }
 
+.ipw-admin-table th,
 .ipw-admin-table td {
     vertical-align: middle;
+    white-space: nowrap;
+}
+
+.ipw-admin-table td.col-allow-wrap {
+    white-space: normal !important;
+    min-width: 150px;
+}
+
+.ipw-row-actions {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 4px !important;
+    white-space: nowrap !important;
+}
+
+.ipw-row-actions .button {
+    margin: 0 !important;
+    padding: 2px 7px !important;
+    font-size: 11px !important;
+    height: 26px !important;
+    line-height: 22px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 3px !important;
+    white-space: nowrap !important;
 }
 
 .ipw-pin-tag {
@@ -870,39 +897,90 @@ body.india-post_page_india-post-settings #wpbody-content > .update-nag,
 }
 
 /* 14. Responsive Polish */
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
     .ipw-portal-frame {
         flex-direction: column;
     }
     .ipw-portal-sidebar {
         width: 100%;
-        padding: 10px 0;
+        padding: 8px 0;
+    }
+    .ipw-sidebar-brand {
+        display: none;
     }
     .ipw-sidebar-nav {
         flex-direction: row;
         flex-wrap: wrap;
-        padding: 5px 12px;
-        gap: 4px;
+        padding: 4px 12px;
+        gap: 6px;
     }
     .ipw-nav-heading {
         display: none;
     }
     .ipw-nav-item {
-        padding: 6px 12px;
-        border-radius: 4px;
+        padding: 7px 14px;
+        border-radius: 6px;
+        font-size: 13px;
     }
     .ipw-nav-item.active {
         border-left: none;
         background: rgba(0, 0, 0, 0.3);
     }
-    .ipw-status-banner {
-        flex-direction: column;
-        align-items: stretch;
+    .ipw-portal-content {
+        padding: 18px 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .ipw-portal-container {
+        margin: 10px 4px 25px;
+        border-radius: 6px;
     }
     .ipw-header-top {
         flex-direction: column;
         align-items: flex-start;
         gap: 12px;
+        padding: 14px 16px;
+    }
+    .ipw-subpage-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 16px;
+    }
+    .ipw-header-actions {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+    .ipw-header-actions .button {
+        width: 100%;
+        text-align: center;
+    }
+    .ipw-status-banner {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        padding: 12px 14px;
+    }
+    .ipw-section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 12px 14px;
+    }
+    .ipw-bulk-action-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .ipw-filter-form {
+        flex-direction: column;
+        width: 100%;
+    }
+    .ipw-portal-content {
+        padding: 12px;
     }
 }
 
