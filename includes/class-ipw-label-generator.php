@@ -134,14 +134,17 @@ class IPW_Label_Generator {
 
         $barcode_svg = IPW_Barcode_Helper::generate_code128_svg($barcode, 45, 1.8);
 
-        $recipient_name    = $order->get_formatted_shipping_full_name() ?: $order->get_formatted_billing_full_name();
-        $recipient_pin     = $order->get_shipping_postcode() ?: $order->get_billing_postcode();
-        $recipient_phone   = $order->get_billing_phone();
+        $shipping_name = trim((string)$order->get_formatted_shipping_full_name());
+        $billing_name  = trim((string)$order->get_formatted_billing_full_name());
+        $recipient_name = !empty($shipping_name) ? $shipping_name : (!empty($billing_name) ? $billing_name : trim($order->get_billing_first_name() . ' ' . $order->get_billing_last_name()));
 
-        $addr1 = $order->get_shipping_address_1() ?: $order->get_billing_address_1();
-        $addr2 = $order->get_shipping_address_2() ?: $order->get_billing_address_2();
-        $city  = $order->get_shipping_city() ?: $order->get_billing_city();
-        $state = $order->get_shipping_state() ?: $order->get_billing_state();
+        $recipient_pin   = trim((string)$order->get_shipping_postcode()) ?: trim((string)$order->get_billing_postcode());
+        $recipient_phone = trim((string)$order->get_billing_phone()) ?: trim((string)$order->get_shipping_phone());
+
+        $addr1 = trim((string)$order->get_shipping_address_1()) ?: trim((string)$order->get_billing_address_1());
+        $addr2 = trim((string)$order->get_shipping_address_2()) ?: trim((string)$order->get_billing_address_2());
+        $city  = trim((string)$order->get_shipping_city()) ?: trim((string)$order->get_billing_city());
+        $state = trim((string)$order->get_shipping_state()) ?: trim((string)$order->get_billing_state());
 
         $sender_name       = get_option('ipw_sender_name', 'DHRUVA PUBLICATIONS');
         $s_line1           = get_option('ipw_sender_add_line_1', 'PLOT NO-168,TOWN CENTRE LAYOUT, NEAR');
@@ -205,10 +208,14 @@ class IPW_Label_Generator {
             wp_die(__('No valid label data could be generated for the selected orders.', 'india-post-woocommerce'));
         }
 
+        if (isset($_GET['repeat']) && $_GET['repeat'] === '4' && count($labels_data) === 1) {
+            $labels_data = array_fill(0, 4, $labels_data[0]);
+        }
+
         if ($format === 'thermal' || $format === 'single') {
             include IPW_PLUGIN_PATH . 'templates/shipping-labels-multi-thermal.php';
         } else {
-            // Default: A4 Sheet (4 A6 labels per sheet)
+            // Default: A6 Sheet (4 labels per A6 sheet)
             include IPW_PLUGIN_PATH . 'templates/shipping-labels-sheet.php';
         }
         exit;

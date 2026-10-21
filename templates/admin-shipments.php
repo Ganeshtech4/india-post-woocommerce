@@ -57,7 +57,7 @@ if (!defined('ABSPATH')) {
         </div>
         <div style="display:flex; align-items:center; gap:10px;">
             <button type="button" class="button button-primary button-large" id="ipw-btn-print-sheet" style="background:#15803d; border-color:#15803d; font-weight:700;">
-                📄 <?php esc_html_e('Print Selected (A4 Sheet - 4 Labels per Page)', 'india-post-woocommerce'); ?>
+                📄 <?php esc_html_e('Print Selected (A6 Sheet - 4 Labels per Sheet)', 'india-post-woocommerce'); ?>
             </button>
             <button type="button" class="button button-secondary" id="ipw-btn-print-thermal">
                 🏷️ <?php esc_html_e('Print Selected (Single / Thermal)', 'india-post-woocommerce'); ?>

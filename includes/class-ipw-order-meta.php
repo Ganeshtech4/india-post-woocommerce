@@ -47,7 +47,7 @@ class IPW_Order_Meta {
      * Register Bulk Actions for WooCommerce Orders page.
      */
     public function register_wc_bulk_actions($actions) {
-        $actions['ipw_print_sheet']   = __('📄 Print India Post Labels (A4 Sheet - 4 per Page)', 'india-post-woocommerce');
+        $actions['ipw_print_sheet']   = __('📄 Print India Post Labels (A6 Sheet - 4 Labels per Sheet)', 'india-post-woocommerce');
         $actions['ipw_print_thermal'] = __('🏷️ Print India Post Labels (Single / Thermal)', 'india-post-woocommerce');
         return $actions;
     }

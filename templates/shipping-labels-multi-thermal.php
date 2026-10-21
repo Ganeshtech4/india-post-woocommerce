@@ -133,7 +133,7 @@ $show_weight = get_option('ipw_show_weight_on_label', 'no') === 'yes';
         </div>
         <div style="display:flex; align-items:center; gap:10px;">
             <button onclick="window.print()" style="background:#0052cc; color:#fff; border:none; padding:8px 18px; font-size:13px; font-weight:700; border-radius:6px; cursor:pointer;">🖨️ <?php esc_html_e('Print Labels Now', 'india-post-woocommerce'); ?></button>
-            <a href="<?php echo esc_url($sheet_url); ?>" style="background:#f8fafc; color:#334155; border:1px solid #cbd5e1; padding:7px 14px; font-size:12px; font-weight:700; border-radius:6px; text-decoration:none;">📄 <?php esc_html_e('Switch to A4 Sheet (4 per Page)', 'india-post-woocommerce'); ?></a>
+            <a href="<?php echo esc_url($sheet_url); ?>" style="background:#f8fafc; color:#334155; border:1px solid #cbd5e1; padding:7px 14px; font-size:12px; font-weight:700; border-radius:6px; text-decoration:none;">📄 <?php esc_html_e('Switch to A6 Sheet (4 per Page)', 'india-post-woocommerce'); ?></a>
             <button onclick="window.close()" style="background:#64748b; color:#fff; border:none; padding:7px 14px; font-size:12px; font-weight:700; border-radius:6px; cursor:pointer;"><?php esc_html_e('Close', 'india-post-woocommerce'); ?></button>
         </div>
     </div>
