@@ -1,0 +1,1044 @@
+/**
+ * India Post Portal Admin Stylesheet
+ * Department of Posts - Customer Self-Service Portal Aesthetics
+ */
+
+/* Container Frame */
+.ipw-portal-container {
+    max-width: 1360px;
+    margin: 15px auto 40px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+/* 1. Portal Header */
+.ipw-portal-header {
+    background: #ffffff;
+    border-bottom: 2px solid #8b151b;
+}
+
+.ipw-header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 28px;
+    background: #ffffff;
+}
+
+.ipw-gov-title-block {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.ipw-emblem-badge {
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    max-height: 48px;
+    max-width: 140px;
+    overflow: hidden;
+}
+
+.ipw-portal-container .ipw-main-logo,
+.ipw-main-logo {
+    height: 46px !important;
+    max-height: 46px !important;
+    width: auto !important;
+    max-width: 130px !important;
+    object-fit: contain !important;
+    display: block !important;
+}
+
+.ipw-portal-container .ipw-subpage-logo,
+.ipw-subpage-logo {
+    height: 38px !important;
+    max-height: 38px !important;
+    width: auto !important;
+    max-width: 110px !important;
+    object-fit: contain !important;
+    display: block !important;
+}
+
+.ipw-gov-text h1 {
+    font-size: 20px;
+    font-weight: 800;
+    color: #8b151b;
+    margin: 0;
+    line-height: 1.2;
+    letter-spacing: -0.3px;
+}
+
+.ipw-gov-text h2 {
+    font-size: 13px;
+    font-weight: 600;
+    color: #475569;
+    margin: 2px 0 0 0;
+    letter-spacing: 0.2px;
+}
+
+.ipw-user-profile-block {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #8b151b;
+    color: #ffffff;
+    padding: 6px 16px 6px 8px;
+    border-radius: 999px;
+}
+
+.ipw-avatar-circle {
+    width: 32px;
+    height: 32px;
+    background: #f59e0b;
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+}
+
+.ipw-welcome-text {
+    font-size: 12px;
+    line-height: 1.2;
+}
+
+.ipw-welcome-text span {
+    font-style: italic;
+    opacity: 0.9;
+    margin-right: 4px;
+}
+
+.ipw-welcome-text strong {
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.ipw-portal-banner-tag {
+    background: #fff5f5;
+    text-align: center;
+    padding: 6px;
+    border-top: 1px solid #fee2e2;
+    color: #8b151b;
+    font-size: 11.5px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+/* 2. Portal Frame Layout */
+.ipw-portal-frame {
+    display: flex;
+    min-height: 750px;
+}
+
+/* 3. Deep Red Sidebar */
+.ipw-portal-sidebar {
+    width: 250px;
+    background: #8b151b;
+    color: #ffffff;
+    flex-shrink: 0;
+    padding: 16px 0;
+}
+
+.ipw-sidebar-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 20px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.ipw-sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+}
+
+.ipw-nav-heading {
+    font-size: 11px;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 1px;
+    padding: 14px 20px 6px;
+    text-transform: uppercase;
+}
+
+.ipw-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    color: rgba(255, 255, 255, 0.9) !important;
+    text-decoration: none !important;
+    font-size: 13.5px;
+    font-weight: 500;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.ipw-nav-item:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff !important;
+}
+
+.ipw-nav-item.active {
+    background: rgba(0, 0, 0, 0.2);
+    font-weight: 700;
+    border-left: 4px solid #f59e0b;
+}
+
+/* 4. Portal Content Area */
+.ipw-portal-content {
+    flex-grow: 1;
+    background: #f8fafc;
+    padding: 24px 28px;
+    overflow-x: hidden;
+}
+
+/* Status Banner */
+.ipw-status-banner {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 22px;
+}
+
+.ipw-status-col .label {
+    display: block;
+    font-size: 10px;
+    font-weight: 800;
+    color: #64748b;
+    letter-spacing: 0.5px;
+    margin-bottom: 3px;
+}
+
+.ipw-status-col .val {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.badge-env-sandbox {
+    background: #fef3c7;
+    color: #92400e;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+}
+
+.badge-env-production {
+    background: #dcfce7;
+    color: #166534;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+}
+
+.status-active {
+    color: #16a34a !important;
+}
+
+.status-pending {
+    color: #d97706 !important;
+}
+
+.font-mono {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.ipw-copy-ip-btn {
+    margin-left: 6px;
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    font-size: 11px;
+    padding: 2px 6px;
+    cursor: pointer;
+}
+
+/* 5. Portal Cards Grid (Government Self-Service Style) */
+.ipw-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.ipw-portal-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.ipw-portal-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+    border-color: #cbd5e1;
+}
+
+.ipw-card-top {
+    display: flex;
+    gap: 12px;
+}
+
+.ipw-card-icon-circle {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #fef2f2;
+    color: #8b151b;
+    border: 1px solid #fecaca;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.ipw-card-content h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0 0 4px 0;
+    line-height: 1.3;
+}
+
+.ipw-card-content p {
+    font-size: 12px;
+    color: #64748b;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.ipw-card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 14px;
+    padding-top: 10px;
+    border-top: 1px solid #f1f5f9;
+}
+
+.status-text-pill {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 999px;
+}
+
+.status-ready {
+    background: #f0fdf4;
+    color: #166534;
+}
+
+.status-sandbox {
+    background: #fffbeb;
+    color: #b45309;
+}
+
+.ipw-card-arrow {
+    font-size: 16px;
+    font-weight: bold;
+    color: #64748b !important;
+    text-decoration: none !important;
+}
+
+.ipw-card-arrow:hover {
+    color: #8b151b !important;
+}
+
+.ipw-btn-inline-sync {
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    cursor: pointer;
+}
+
+/* 6. Metrics Strip */
+.ipw-metrics-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.ipw-metric-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 16px 20px;
+    border-left: 4px solid #8b151b;
+}
+
+.metric-transit {
+    border-left-color: #0284c7;
+}
+
+.metric-ofd {
+    border-left-color: #d97706;
+}
+
+.metric-delivered {
+    border-left-color: #16a34a;
+}
+
+.ipw-metric-card .metric-val {
+    font-size: 26px;
+    font-weight: 900;
+    color: #0f172a;
+    line-height: 1;
+    margin-bottom: 6px;
+}
+
+.ipw-metric-card .metric-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #64748b;
+}
+
+/* 7. Tools Section & PIN Lookup */
+.ipw-widget-section {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    overflow: hidden;
+}
+
+.ipw-widget-header {
+    background: #fafbfc;
+    padding: 14px 20px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.ipw-widget-header h3 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.ipw-widget-body {
+    padding: 18px 20px;
+}
+
+.ipw-pincode-form {
+    display: flex;
+    gap: 10px;
+    max-width: 500px;
+}
+
+.ipw-pincode-form input {
+    flex: 1;
+    padding: 6px 12px;
+}
+
+/* 8. Table Sections */
+.ipw-table-section {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    overflow: hidden;
+}
+
+.ipw-section-header {
+    background: #fafbfc;
+    padding: 14px 20px;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ipw-section-header h3 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.ipw-admin-table td {
+    vertical-align: middle;
+}
+
+.ipw-pin-tag {
+    background: #f1f5f9;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-family: monospace;
+}
+
+.ipw-cod-badge {
+    background: #fee2e2;
+    color: #991b1b;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.ipw-type-pill {
+    background: #e2e8f0;
+    color: #334155;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+/* Status Pills */
+.ipw-status-pill {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    white-space: nowrap !important;
+    text-align: center;
+    line-height: 1.3;
+}
+
+.status-booked {
+    background: #e0f2fe;
+    color: #0369a1;
+    border: 1px solid #bae6fd;
+}
+
+.status-in_transit {
+    background: #ede9fe;
+    color: #6d28d9;
+    border: 1px solid #ddd6fe;
+}
+
+.status-out_for_delivery {
+    background: #fef3c7;
+    color: #92400e;
+    border: 1px solid #fde68a;
+}
+
+.status-delivered {
+    background: #dcfce7;
+    color: #15803d;
+    border: 1px solid #bbf7d0;
+}
+
+/* 9. Subpages & Settings Form */
+.ipw-subpage-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    border-bottom: 2px solid #8b151b;
+    padding: 20px 24px;
+}
+
+.ipw-subpage-header h2 {
+    margin: 0 0 4px 0;
+    font-size: 20px;
+    color: #8b151b;
+}
+
+.ipw-filter-bar {
+    background: #ffffff;
+    padding: 14px 20px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.ipw-filter-form {
+    display: flex;
+    gap: 12px;
+}
+
+.ipw-settings-form {
+    padding: 24px;
+}
+
+.ipw-settings-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    overflow: hidden;
+}
+
+.ipw-card-header-bar {
+    background: #fafbfc;
+    padding: 12px 20px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.ipw-card-header-bar h3 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.ipw-card-body-padded {
+    padding: 20px;
+}
+
+.ipw-env-boxes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 16px;
+    margin-top: 15px;
+}
+
+.ipw-env-box {
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+}
+
+.ipw-box-sandbox {
+    background: #fffbeb;
+    border-color: #fde68a;
+}
+
+.ipw-box-prod {
+    background: #f0fdf4;
+    border-color: #bbf7d0;
+}
+
+.ipw-env-box h4 {
+    margin: 0 0 12px 0;
+    font-size: 14px;
+}
+
+/* 10. Metabox Styling */
+.ipw-metabox-wrapper {
+    font-size: 12px;
+}
+
+.ipw-meta-badge-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.ipw-consignment-display label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.ipw-awb-copy-wrap {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 10px;
+}
+
+.ipw-awb-copy-wrap input {
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.ipw-meta-info-table {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    line-height: 1.6;
+}
+
+.ipw-meta-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.ipw-btn-block {
+    width: 100%;
+    text-align: center;
+}
+
+.ipw-action-row {
+    display: flex;
+    gap: 6px;
+}
+
+.ipw-action-row > * {
+    flex: 1;
+    text-align: center;
+}
+
+.ipw-mini-timeline {
+    margin-top: 12px;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 8px;
+}
+
+.ipw-timeline-title {
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.ipw-timeline-list {
+    margin: 0;
+    padding-left: 15px;
+}
+
+.ipw-timeline-list li {
+    margin-bottom: 4px;
+}
+
+.ipw-ev-event {
+    font-weight: 600;
+}
+
+.ipw-ev-loc {
+    color: #64748b;
+    font-size: 11px;
+}
+
+.ipw-meta-footer {
+    margin-top: 12px;
+    text-align: center;
+}
+
+.ipw-cancel-link {
+    color: #dc2626 !important;
+    font-size: 11px !important;
+}
+
+.ipw-dim-inputs {
+    display: flex;
+    gap: 6px;
+}
+
+.ipw-dim-inputs input {
+    width: 33.3%;
+}
+
+.ipw-fields-row {
+    display: flex;
+    gap: 8px;
+}
+
+.ipw-fields-row > p {
+    flex: 1;
+    margin: 0 0 10px 0;
+}
+
+/* 11. Notice Isolation (Suppresses 3rd Party Plugin Notice Pollution) */
+body.toplevel_page_india-post-dashboard #wpbody-content > .notice:not(.ipw-allowed-notice),
+body.toplevel_page_india-post-dashboard #wpbody-content > .update-nag,
+body.toplevel_page_india-post-dashboard #wpbody-content > div.updated:not(.ipw-allowed-notice),
+body.toplevel_page_india-post-dashboard #wpbody-content > div.error:not(.ipw-allowed-notice),
+body.india-post_page_india-post-shipments #wpbody-content > .notice:not(.ipw-allowed-notice),
+body.india-post_page_india-post-shipments #wpbody-content > .update-nag,
+body.india-post_page_india-post-settings #wpbody-content > .notice:not(.ipw-allowed-notice),
+body.india-post_page_india-post-settings #wpbody-content > .update-nag,
+.ipw-portal-container .notice:not(.ipw-allowed-notice),
+.ipw-portal-container .update-nag {
+    display: none !important;
+}
+
+/* 12. Inline Alerts (Replaces Browser Alert Popups) */
+.ipw-inline-alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 18px;
+    border-radius: 8px;
+    margin: 12px 0;
+    font-size: 13.5px;
+    line-height: 1.4;
+    position: relative;
+    border: 1px solid transparent;
+}
+
+.ipw-inline-alert .alert-icon {
+    font-size: 16px;
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.ipw-inline-alert .alert-body {
+    flex-grow: 1;
+}
+
+.ipw-inline-alert .alert-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 6px;
+    font-size: 12px;
+}
+
+.ipw-inline-alert .alert-close {
+    position: absolute;
+    right: 12px;
+    top: 10px;
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: inherit;
+    opacity: 0.6;
+    padding: 0;
+}
+
+.ipw-inline-alert .alert-close:hover {
+    opacity: 1;
+}
+
+.ipw-alert-success {
+    background: #f0fdf4;
+    border-color: #bbf7d0;
+    color: #166534;
+}
+
+.ipw-alert-error {
+    background: #fef2f2;
+    border-color: #fecaca;
+    color: #991b1b;
+}
+
+.ipw-alert-warning {
+    background: #fffbeb;
+    border-color: #fde68a;
+    color: #92400e;
+}
+
+.ipw-alert-info {
+    background: #f0f9ff;
+    border-color: #bae6fd;
+    color: #0369a1;
+}
+
+/* 13. Floating Toast System */
+.ipw-toast-container {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 999999;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.ipw-toast-item {
+    background: #0f172a;
+    color: #ffffff;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    font-size: 13.5px;
+    font-weight: 600;
+    display: none;
+    min-width: 260px;
+}
+
+.ipw-toast-item.toast-success {
+    border-left: 4px solid #22c55e;
+}
+
+.ipw-toast-item.toast-error {
+    border-left: 4px solid #ef4444;
+}
+
+/* 14. Responsive Polish */
+@media (max-width: 1024px) {
+    .ipw-portal-frame {
+        flex-direction: column;
+    }
+    .ipw-portal-sidebar {
+        width: 100%;
+        padding: 10px 0;
+    }
+    .ipw-sidebar-nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 5px 12px;
+        gap: 4px;
+    }
+    .ipw-nav-heading {
+        display: none;
+    }
+    .ipw-nav-item {
+        padding: 6px 12px;
+        border-radius: 4px;
+    }
+    .ipw-nav-item.active {
+        border-left: none;
+        background: rgba(0, 0, 0, 0.3);
+    }
+    .ipw-status-banner {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .ipw-header-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+}
+
+/* 15. WooCommerce Orders Table Status Badges */
+.ipw-order-badge {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    padding: 3px 8px !important;
+    border-radius: 999px !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.3px !important;
+    white-space: nowrap !important;
+}
+.ipw-badge-unbooked {
+    background: #f1f5f9 !important;
+    color: #94a3b8 !important;
+}
+.ipw-badge-booked {
+    background: #ede9fe !important;
+    color: #6d28d9 !important;
+    border: 1px solid #ddd6fe !important;
+}
+.ipw-badge-transit {
+    background: #e0f2fe !important;
+    color: #0369a1 !important;
+    border: 1px solid #bae6fd !important;
+}
+.ipw-badge-ofd {
+    background: #fef3c7 !important;
+    color: #b45309 !important;
+    border: 1px solid #fde68a !important;
+}
+.ipw-badge-delivered {
+    background: #dcfce7 !important;
+    color: #15803d !important;
+    border: 1px solid #bbf7d0 !important;
+}
+.ipw-order-awb-cell a.ipw-awb-link {
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
+    font-size: 12px !important;
+    color: #8b151b !important;
+    text-decoration: none !important;
+    font-weight: 700 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+}
+.ipw-order-awb-cell a.ipw-awb-link:hover {
+    text-decoration: underline !important;
+    color: #680e13 !important;
+}
+
+/* Modern Toggle Switch */
+.ipw-switch-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+    margin-bottom: 4px;
+}
+
+.ipw-switch-input {
+    display: none !important;
+}
+
+.ipw-switch-slider {
+    width: 42px;
+    height: 22px;
+    background-color: #cbd5e1;
+    border-radius: 999px;
+    position: relative;
+    transition: background-color 0.25s ease;
+    display: inline-block;
+    vertical-align: middle;
+    flex-shrink: 0;
+}
+
+.ipw-switch-slider::before {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    left: 3px;
+    top: 3px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    transition: transform 0.25s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+
+.ipw-switch-input:checked + .ipw-switch-slider {
+    background-color: #8b151b;
+}
+
+.ipw-switch-input:checked + .ipw-switch-slider::before {
+    transform: translateX(20px);
+}
+
+.ipw-switch-label {
+    font-weight: 600;
+    color: #1e293b;
+    font-size: 13.5px;
+}
+
+/* 13. Multi-Label & Bulk Printing Toolbar */
+.ipw-bulk-action-bar {
+    transition: all 0.2s ease-in-out;
+}
+
+.ipw-bulk-action-bar .button-primary {
+    background: #15803d !important;
+    border-color: #15803d !important;
+    color: #ffffff !important;
+    box-shadow: 0 2px 4px rgba(21, 128, 61, 0.2);
+}
+
+.ipw-bulk-action-bar .button-primary:hover {
+    background: #166534 !important;
+    border-color: #166534 !important;
+}
+
+.ipw-table-wrapper input[type="checkbox"] {
+    cursor: pointer;
+    border: 1.5px solid #94a3b8;
+    border-radius: 3px;
+    width: 17px;
+    height: 17px;
+}
+
+.ipw-table-wrapper input[type="checkbox"]:checked {
+    background-color: #15803d;
+    border-color: #15803d;
+}
+

@@ -1,0 +1,804 @@
+/**
+ * Customer Tracking Page Styles
+ * India Post WooCommerce Plugin
+ */
+
+.ipw-tracking-container {
+    max-width: 760px;
+    width: 100%;
+    margin: 15px auto;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    color: #1e293b;
+    box-sizing: border-box;
+}
+
+/* Header */
+.ipw-tracker-header {
+    background: linear-gradient(135deg, #8b151b 0%, #680e13 100%);
+    padding: 28px 24px 22px;
+    color: #ffffff;
+    text-align: center;
+    position: relative;
+}
+
+.ipw-tracker-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.ipw-badge-dot {
+    width: 8px;
+    height: 8px;
+    background: #4ade80;
+    border-radius: 50%;
+    box-shadow: 0 0 6px #4ade80;
+}
+
+.ipw-tracker-title {
+    font-size: 24px;
+    font-weight: 800;
+    margin: 0 0 6px 0;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+}
+
+.ipw-tracker-subtitle {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 540px;
+    margin: 0 auto 16px;
+    line-height: 1.5;
+}
+
+/* Mode Tabs */
+.ipw-tracker-tabs {
+    display: inline-flex;
+    background: rgba(0, 0, 0, 0.25);
+    padding: 4px;
+    border-radius: 10px;
+    gap: 4px;
+}
+
+.ipw-tab-btn {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.ipw-tab-btn:hover {
+    color: #ffffff;
+}
+
+.ipw-tab-btn.active {
+    background: #ffffff;
+    color: #8b151b;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Tab Contents */
+.ipw-tab-content {
+    padding: 24px 28px;
+}
+
+/* Step Box */
+.ipw-step-box {
+    max-width: 520px;
+    margin: 0 auto;
+}
+
+.ipw-form-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.ipw-input-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: #334155;
+    margin-bottom: 6px;
+}
+
+.ipw-phone-input-wrap {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: stretch !important;
+    border: 2px solid #cbd5e1;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #ffffff;
+    transition: border-color 0.2s;
+}
+
+.ipw-phone-input-wrap:focus-within {
+    border-color: #8b151b;
+    box-shadow: 0 0 0 3px rgba(139, 21, 27, 0.12);
+}
+
+.ipw-country-code {
+    background: #f8fafc !important;
+    color: #334155 !important;
+    padding: 0 14px !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    border-right: 1px solid #cbd5e1 !important;
+    line-height: 1 !important;
+    user-select: none !important;
+}
+
+.ipw-phone-input-wrap input {
+    border: none !important;
+    outline: none !important;
+    padding: 12px 14px !important;
+    font-size: 16px !important;
+    width: 100% !important;
+    box-shadow: none !important;
+    background: transparent !important;
+}
+
+.ipw-awb-input,
+.ipw-otp-input {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 16px;
+    border: 2px solid #cbd5e1;
+    border-radius: 8px;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+
+.ipw-otp-input {
+    letter-spacing: 12px;
+    font-size: 24px;
+    text-align: center;
+    font-weight: bold;
+    color: #8b151b;
+}
+
+.ipw-awb-input:focus,
+.ipw-otp-input:focus {
+    border-color: #8b151b;
+    box-shadow: 0 0 0 3px rgba(139, 21, 27, 0.12);
+}
+
+.ipw-hint {
+    display: block;
+    font-size: 12px;
+    color: #64748b;
+    margin-top: 5px;
+}
+
+/* Submit Button */
+.ipw-submit-btn {
+    background: #8b151b;
+    color: #ffffff;
+    border: none;
+    padding: 13px 20px;
+    font-size: 15px;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.ipw-submit-btn:hover {
+    background: #731016;
+}
+
+.ipw-submit-btn:active {
+    transform: scale(0.99);
+}
+
+/* OTP Specifics */
+.ipw-otp-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.ipw-otp-header h3 {
+    margin: 0 0 6px 0;
+    font-size: 20px;
+    color: #0f172a;
+}
+
+.ipw-otp-header p {
+    font-size: 14px;
+    color: #475569;
+    margin: 0;
+}
+
+.ipw-link-btn {
+    background: none;
+    border: none;
+    color: #8b151b;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: underline;
+    cursor: pointer;
+    margin-left: 6px;
+}
+
+.ipw-sim-banner {
+    background: #fffbeb;
+    border: 1px solid #fef3c7;
+    padding: 10px 14px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 13px;
+    color: #92400e;
+    margin-bottom: 15px;
+}
+
+.ipw-sim-tag {
+    background: #f59e0b;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-right: 6px;
+}
+
+.ipw-otp-action-row {
+    display: flex;
+    gap: 12px;
+}
+
+.ipw-otp-action-row .ipw-submit-btn {
+    flex: 2;
+}
+
+.ipw-resend-btn {
+    flex: 1;
+    background: #f1f5f9;
+    color: #475569;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.ipw-resend-btn:not(:disabled):hover {
+    background: #e2e8f0;
+    color: #1e293b;
+}
+
+.ipw-resend-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Notices */
+.ipw-notice {
+    margin-top: 15px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    line-height: 1.4;
+}
+
+.ipw-notice-error {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #991b1b;
+}
+
+.ipw-notice-success {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    color: #166534;
+}
+
+/* Results Section */
+.ipw-results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+}
+
+.ipw-results-title {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.ipw-results-sub {
+    margin: 4px 0 0 0;
+    font-size: 13px;
+    color: #64748b;
+}
+
+.ipw-btn-logout {
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #475569;
+    cursor: pointer;
+}
+
+.ipw-btn-logout:hover {
+    background: #e2e8f0;
+}
+
+/* Shipment Cards */
+.ipw-shipment-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.ipw-shipment-card:hover {
+    border-color: #cbd5e1;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+}
+
+.ipw-card-header {
+    background: #fafbfc;
+    padding: 16px 20px;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.ipw-awb-title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.ipw-awb-code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 17px;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: 0.5px;
+}
+
+.ipw-status-pill {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap !important;
+}
+
+.status-booked,
+.status-in_transit,
+.status-not_delivered {
+    background: #e0f2fe;
+    color: #0369a1;
+}
+
+.status-out_for_delivery {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.status-delivered {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.status-rts,
+.status-returned {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.ipw-card-meta {
+    font-size: 13px;
+    color: #64748b;
+}
+
+.ipw-card-body {
+    padding: 18px 20px 20px;
+}
+
+.ipw-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+    background: #f8fafc;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid #edf2f7;
+}
+
+.ipw-summary-item .label {
+    display: block;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    color: #64748b;
+    font-weight: 600;
+    margin-bottom: 2px;
+    letter-spacing: 0.3px;
+}
+
+.ipw-summary-item .val {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1e293b;
+    word-break: break-word;
+}
+
+/* Modern Compact 3-Column Timeline with Scroll */
+.ipw-tl-card-section {
+    margin-top: 14px;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 14px;
+}
+
+.ipw-tl-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.ipw-tl-heading {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: -0.2px;
+}
+
+.ipw-tl-count {
+    font-size: 11px;
+    font-weight: 600;
+    color: #64748b;
+    background: #f1f5f9;
+    padding: 2px 8px;
+    border-radius: 999px;
+}
+
+/* Scrollable Container with Sleek Scrollbar */
+.ipw-timeline-scroll {
+    max-height: 250px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 6px;
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 #f8fafc;
+}
+
+.ipw-timeline-scroll::-webkit-scrollbar {
+    width: 5px;
+}
+
+.ipw-timeline-scroll::-webkit-scrollbar-track {
+    background: #f8fafc;
+    border-radius: 4px;
+}
+
+.ipw-timeline-scroll::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+
+.ipw-timeline-scroll::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+.ipw-timeline-list {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Individual Timeline Row */
+.ipw-tl-item {
+    display: flex;
+    align-items: stretch;
+    position: relative;
+}
+
+/* Left Time Column */
+.ipw-tl-time-col {
+    width: 65px;
+    flex-shrink: 0;
+    text-align: right;
+    padding-right: 14px;
+    padding-top: 1px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.ipw-tl-date {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #1e293b;
+    line-height: 1.25;
+    white-space: nowrap;
+}
+
+.ipw-tl-time {
+    font-size: 11px;
+    color: #94a3b8;
+    margin-top: 2px;
+    line-height: 1.2;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+/* Center Column: Track Dot & Connecting Line */
+.ipw-tl-track-col {
+    width: 16px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+/* Completed Step: Solid green dot & thick solid green line */
+.ipw-tl-item.is-completed .ipw-tl-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #10b981;
+    border: none;
+    box-shadow: 0 0 0 2px #d1fae5;
+    margin-top: 4px;
+    z-index: 2;
+    flex-shrink: 0;
+}
+
+.ipw-tl-item.is-completed .ipw-tl-line {
+    position: absolute;
+    top: 14px;
+    bottom: -2px;
+    left: 50%;
+    width: 2.5px;
+    transform: translateX(-50%);
+    background: #10b981; /* Thick solid green line after step done */
+    z-index: 1;
+}
+
+.ipw-tl-item.is-completed .ipw-tl-event-text {
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.ipw-tl-item.is-completed .ipw-tl-date {
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.ipw-tl-done-badge {
+    display: inline-flex;
+    align-items: center;
+    background: #f0fdf4;
+    color: #166534;
+    border: 1px solid #bbf7d0;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+/* In-Process Step: Pulsing dot & dotted grey line forward */
+.ipw-tl-item.is-in-process .ipw-tl-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #10b981;
+    border: 2px solid #ffffff;
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.35);
+    margin-top: 2px;
+    z-index: 2;
+    flex-shrink: 0;
+    animation: ipwPulse 2s infinite;
+}
+
+@keyframes ipwPulse {
+    0% { box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.4); }
+    50% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0.15); }
+    100% { box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.4); }
+}
+
+.ipw-tl-item.is-in-process .ipw-tl-line {
+    position: absolute;
+    top: 15px;
+    bottom: -2px;
+    left: 50%;
+    width: 2px;
+    transform: translateX(-50%);
+    background: repeating-linear-gradient(to bottom, #94a3b8 0, #94a3b8 4px, transparent 4px, transparent 7px); /* Dotted/dashed grey line */
+    z-index: 1;
+}
+
+.ipw-tl-item.is-in-process .ipw-tl-event-text {
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.ipw-tl-item.is-in-process .ipw-tl-date {
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.ipw-tl-active-badge {
+    display: inline-flex;
+    align-items: center;
+    background: #dcfce7;
+    color: #15803d;
+    border: 1px solid #86efac;
+    font-size: 9.5px;
+    font-weight: 800;
+    padding: 1px 7px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+/* Pending Upcoming Step: Neutral grey dot & muted text */
+.ipw-tl-item.is-pending .ipw-tl-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #f8fafc;
+    border: 2px solid #cbd5e1;
+    margin-top: 4px;
+    z-index: 2;
+    flex-shrink: 0;
+}
+
+.ipw-tl-item.is-pending .ipw-tl-line {
+    display: none;
+}
+
+.ipw-tl-item.is-pending .ipw-tl-event-text {
+    font-weight: 500;
+    color: #94a3b8;
+}
+
+.ipw-tl-item.is-pending .ipw-tl-date,
+.ipw-tl-item.is-pending .ipw-tl-time {
+    color: #94a3b8;
+}
+
+.ipw-tl-item.is-pending .ipw-tl-location {
+    color: #cbd5e1;
+}
+
+.ipw-tl-pending-badge {
+    display: inline-flex;
+    align-items: center;
+    background: #f1f5f9;
+    color: #64748b;
+    border: 1px solid #e2e8f0;
+    font-size: 9px;
+    font-weight: 600;
+    padding: 1px 6px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+/* Right Content Column */
+.ipw-tl-content-col {
+    flex: 1;
+    padding-left: 14px;
+    padding-bottom: 18px;
+    text-align: left;
+}
+
+.ipw-tl-item.is-last .ipw-tl-content-col {
+    padding-bottom: 6px;
+}
+
+.ipw-tl-event {
+    font-size: 13.5px;
+    line-height: 1.3;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.ipw-tl-location {
+    font-size: 12px;
+    color: #64748b;
+    margin-top: 3px;
+    line-height: 1.35;
+}
+
+.ipw-tl-remarks {
+    font-size: 11px;
+    color: #92400e;
+    background: #fef3c7;
+    border-radius: 4px;
+    padding: 2px 7px;
+    display: inline-block;
+    margin-top: 4px;
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+@media (max-width: 600px) {
+    .ipw-summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+    .ipw-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .ipw-otp-action-row {
+        flex-direction: column;
+    }
+    .ipw-tl-time-col {
+        width: 55px;
+        padding-right: 10px;
+    }
+    .ipw-tl-date {
+        font-size: 11.5px;
+    }
+    .ipw-tl-time {
+        font-size: 10px;
+    }
+    .ipw-tl-content-col {
+        padding-left: 10px;
+        padding-bottom: 16px;
+    }
+    .ipw-tl-event {
+        font-size: 12.5px;
+    }
+    .ipw-tl-location {
+        font-size: 11.5px;
+    }
+}
