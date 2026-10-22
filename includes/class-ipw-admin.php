@@ -10,6 +10,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+if (!class_exists('IPW_Admin')) {
 class IPW_Admin {
 
     private $plugin;
@@ -361,4 +362,5 @@ class IPW_Admin {
             'updated' => $updated_count,
         ));
     }
+}
 }

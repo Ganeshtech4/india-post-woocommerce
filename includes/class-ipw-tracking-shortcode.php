@@ -10,6 +10,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+if (!class_exists('IPW_Tracking_Shortcode')) {
 class IPW_Tracking_Shortcode {
 
     private $plugin;
@@ -161,4 +162,5 @@ class IPW_Tracking_Shortcode {
             'del_status'       => isset($item['del_status']['del_status']) ? $item['del_status']['del_status'] : 'in_transit',
         ));
     }
+}
 }

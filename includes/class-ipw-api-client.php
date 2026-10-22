@@ -12,6 +12,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+if (!class_exists('IPW_API_Client')) {
 class IPW_API_Client {
 
     /**
@@ -743,4 +744,5 @@ class IPW_API_Client {
             'data'        => $data,
         );
     }
+}
 }

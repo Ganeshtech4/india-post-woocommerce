@@ -10,6 +10,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+if (!class_exists('IPW_Webhook')) {
 class IPW_Webhook {
 
     private $plugin;
@@ -135,4 +136,5 @@ class IPW_Webhook {
             'status'    => $new_status,
         ), 200);
     }
+}
 }

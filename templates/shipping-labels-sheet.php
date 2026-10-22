@@ -206,9 +206,12 @@ $show_weight = get_option('ipw_show_weight_on_label', 'no') === 'yes';
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
             box-sizing: border-box;
             display: grid;
-            grid-template-columns: calc(50% - 1mm) calc(50% - 1mm);
-            grid-template-rows: calc(50% - 1mm) calc(50% - 1mm);
-            gap: 2mm;
+            grid-template-columns: calc(50% - 1.5mm) calc(50% - 1.5mm);
+            grid-template-rows: auto auto;
+            align-content: space-between;
+            justify-content: space-between;
+            gap: 2mm 3mm;
+            padding: 1mm 0;
             overflow: hidden;
             page-break-after: always;
             break-after: page;
@@ -219,103 +222,88 @@ $show_weight = get_option('ipw_show_weight_on_label', 'no') === 'yes';
             break-after: auto;
         }
 
-        /* Individual Label Slot (49.5mm x 71mm) */
+        /* Individual Label Card (Clean, tight, no empty space inside) */
         .ipw-grid-label-slot {
             width: 100%;
-            height: 100%;
-            max-height: 71mm;
+            height: auto;
             box-sizing: border-box;
-            border: 1px solid #000000;
+            border: 1.2px solid #000000;
+            border-radius: 3px;
             background: #ffffff;
-            padding: 1.5mm 2mm;
+            padding: 1.8mm 2mm;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            overflow: hidden;
+            justify-content: flex-start;
             position: relative;
         }
 
         .ipw-grid-label-slot.is-empty {
             border: 1px dashed #cbd5e1;
             background: #f8fafc;
+            min-height: 54mm;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #94a3b8;
-            font-size: 9px;
+            font-size: 8px;
             font-style: italic;
         }
 
         /* Sections Divider */
         .ipw-slot-section {
-            padding-bottom: 1px;
-            margin-bottom: 1px;
-            border-bottom: 0.8px solid #000000;
+            padding: 1.2mm 0;
+            margin: 0;
+            border-bottom: 1px solid #000000;
+        }
+
+        .ipw-slot-section:first-child {
+            padding-top: 0;
         }
 
         .ipw-slot-section:last-child {
             border-bottom: none;
             padding-bottom: 0;
-            margin-bottom: 0;
         }
 
         /* SECTION 1: TO (Recipient) */
-        .ipw-to-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1px;
-        }
-
-        .ipw-to-badge {
-            background: #000000;
-            color: #ffffff;
-            font-size: 6.5px;
-            font-weight: 900;
-            padding: 0.5px 3px;
-            border-radius: 2px;
-            letter-spacing: 0.3px;
-        }
-
-        .ipw-to-phone {
-            font-size: 6.5px;
+        .ipw-sec-title {
+            font-size: 7.5px;
             font-weight: 800;
-            color: #000000;
+            line-height: 1.1;
+            color: #000;
+            letter-spacing: 0.2px;
+            margin-bottom: 0.8px;
         }
 
         .ipw-recipient-name {
-            font-size: 8px;
+            font-size: 8.5px;
             font-weight: 900;
-            line-height: 1.1;
-            margin: 0.5px 0 1px;
+            line-height: 1.15;
+            margin: 0.5px 0 1.2px;
             color: #000000;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
             letter-spacing: 0.1px;
         }
 
         .ipw-recipient-address {
-            font-size: 6.5px;
-            line-height: 1.15;
+            font-size: 6.2px;
+            line-height: 1.2;
             color: #111111;
-            max-height: 20px;
-            overflow: hidden;
         }
 
-        .ipw-city-pin {
-            font-size: 7px;
-            font-weight: 800;
-            color: #000000;
-            margin-top: 0.5px;
+        .ipw-contact-row {
+            font-size: 6.2px;
+            font-weight: 700;
+            line-height: 1.2;
+            color: #000;
+            margin-top: 1.2px;
         }
 
         /* SECTION 2: FROM & LOGO */
         .ipw-section-from {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            gap: 2px;
+            align-items: stretch;
+            gap: 2.5px;
         }
 
         .ipw-from-left {
@@ -323,62 +311,83 @@ $show_weight = get_option('ipw_show_weight_on_label', 'no') === 'yes';
             min-width: 0;
         }
 
-        .ipw-from-title {
-            font-size: 6.5px;
+        .ipw-sender-name {
+            font-size: 7.2px;
             font-weight: 800;
-            line-height: 1.1;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            line-height: 1.15;
+            margin-bottom: 0.8px;
+            color: #000;
         }
 
         .ipw-from-address {
             font-size: 5.8px;
-            line-height: 1.1;
-            color: #333333;
+            line-height: 1.18;
+            color: #111111;
         }
 
         .ipw-from-right {
-            flex: 0 0 16mm;
+            flex: 0 0 17mm;
             display: flex;
             align-items: center;
-            justify-content: flex-end;
+            justify-content: center;
         }
 
-        .ipw-from-logo {
-            max-height: 14px;
-            max-width: 16mm;
+        .ipw-client-logo-box {
+            border: 0.8px solid #94a3b8;
+            border-radius: 2px;
+            padding: 1.5px;
+            background: #ffffff;
+            width: 100%;
+            height: 100%;
+            min-height: 13.5mm;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ipw-client-logo-img {
+            max-height: 12.5mm;
+            max-width: 100%;
             object-fit: contain;
             display: block;
         }
 
         /* SECTION 3: ITEM DETAIL TABLE */
+        .ipw-items-header {
+            font-size: 6.8px;
+            font-weight: 800;
+            text-decoration: underline;
+            margin-bottom: 1.2px;
+            letter-spacing: 0.2px;
+        }
+
         .ipw-items-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 6px;
-            line-height: 1.1;
+            font-size: 5.8px;
+            line-height: 1.15;
         }
 
         .ipw-items-table th {
             text-align: left;
-            padding: 1px 2px;
-            border-bottom: 0.8px solid #000000;
+            padding: 1.2px 2px;
+            border-bottom: 0.8px solid #cbd5e1;
             font-weight: 800;
             background: #f1f5f9;
-            font-size: 5.8px;
+            font-size: 5.6px;
+            color: #1e293b;
         }
 
         .ipw-items-table td {
-            padding: 1px 2px;
+            padding: 1.2px 2px;
             vertical-align: top;
-            border-bottom: 0.5px solid #e2e8f0;
+            border-bottom: 0.5px solid #f1f5f9;
         }
 
         .col-sr { width: 12px; text-align: center; }
-        .col-name { font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 22mm; }
+        .col-name { font-weight: 700; }
         .col-hsn { width: 22px; text-align: center; }
-        .col-qty { width: 24px; text-align: right; white-space: nowrap; }
+        .col-qty { width: 26px; text-align: right; white-space: nowrap; }
 
         /* SECTION 4: INDIA POST DETAILS & BARCODE */
         .ipw-section-post {
@@ -386,25 +395,25 @@ $show_weight = get_option('ipw_show_weight_on_label', 'no') === 'yes';
         }
 
         .ipw-post-service-title {
-            font-size: 6.5px;
+            font-size: 6.8px;
             font-weight: 900;
             letter-spacing: 0.2px;
             text-decoration: underline;
             display: block;
-            margin-bottom: 0.5px;
+            margin-bottom: 0.8px;
         }
 
         .ipw-contract-line {
             font-size: 5.5px;
             font-weight: 700;
             color: #222;
-            margin-bottom: 1px;
+            margin-bottom: 1.2px;
             letter-spacing: 0.1px;
         }
 
         .ipw-barcode-wrap {
             text-align: center;
-            margin: 0.5px 0;
+            margin: 0.8px 0;
             overflow: hidden;
         }
 
@@ -412,7 +421,7 @@ $show_weight = get_option('ipw_show_weight_on_label', 'no') === 'yes';
             width: 44mm !important;
             max-width: 98% !important;
             height: auto !important;
-            max-height: 11mm !important;
+            max-height: 10.5mm !important;
             display: block !important;
             margin: 0 auto !important;
         }
@@ -421,36 +430,38 @@ $show_weight = get_option('ipw_show_weight_on_label', 'no') === 'yes';
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-top: 1px;
-            margin-top: 0.5px;
-            border-top: 0.8px dashed #64748b;
+            padding-top: 1.2px;
+            margin-top: 1.2px;
+            border-top: 0.8px dashed #94a3b8;
             font-size: 6.5px;
             font-weight: 800;
         }
 
         .ipw-dest-pin-box {
             font-weight: 800;
+            font-size: 6.5px;
         }
 
         .ipw-dest-pin-box .pin-val {
-            font-size: 8px;
+            font-size: 8.5px;
             font-weight: 900;
         }
 
         .ipw-ord-wt {
             font-weight: 700;
-            font-size: 6.5px;
+            font-size: 6px;
             text-align: right;
+            line-height: 1.2;
         }
 
         .ipw-cod-strip {
             background: #000000;
             color: #ffffff;
-            padding: 1px 2px;
+            padding: 1.2px 3px;
             font-size: 6px;
             font-weight: 900;
             text-align: center;
-            margin-top: 1px;
+            margin-top: 1.2px;
             letter-spacing: 0.3px;
         }
 
@@ -504,13 +515,15 @@ $show_weight = get_option('ipw_show_weight_on_label', 'no') === 'yes';
                 height: 144mm !important;
                 max-height: 144mm !important;
                 margin: 0 !important;
-                padding: 0 !important;
+                padding: 1mm 0 !important;
                 border: none !important;
                 box-shadow: none !important;
                 display: grid !important;
-                grid-template-columns: calc(50% - 1mm) calc(50% - 1mm) !important;
-                grid-template-rows: calc(50% - 1mm) calc(50% - 1mm) !important;
-                gap: 2mm !important;
+                grid-template-columns: calc(50% - 1.5mm) calc(50% - 1.5mm) !important;
+                grid-template-rows: auto auto !important;
+                align-content: space-between !important;
+                justify-content: space-between !important;
+                gap: 2mm 3mm !important;
                 box-sizing: border-box !important;
                 overflow: hidden !important;
                 page-break-inside: avoid !important;
@@ -519,9 +532,9 @@ $show_weight = get_option('ipw_show_weight_on_label', 'no') === 'yes';
 
             .ipw-grid-label-slot {
                 width: 100% !important;
-                height: 100% !important;
-                max-height: 71mm !important;
-                border: 1px solid #000000 !important;
+                height: auto !important;
+                border: 1.2px solid #000000 !important;
+                border-radius: 3px !important;
                 box-sizing: border-box !important;
                 page-break-inside: avoid !important;
                 break-inside: avoid !important;
@@ -531,6 +544,7 @@ $show_weight = get_option('ipw_show_weight_on_label', 'no') === 'yes';
             .ipw-grid-label-slot.is-empty {
                 border: 1px dashed #cbd5e1 !important;
                 background: transparent !important;
+                min-height: 54mm !important;
                 visibility: visible !important;
             }
         }
@@ -583,44 +597,53 @@ $show_weight = get_option('ipw_show_weight_on_label', 'no') === 'yes';
 
                                 <!-- SECTION 1: TO (RECIPIENT) -->
                                 <div class="ipw-slot-section ipw-section-to">
-                                    <div class="ipw-to-header">
-                                        <span class="ipw-to-badge">TO</span>
-                                        <span class="ipw-to-phone">PH: <?php echo esc_html($lbl['recipient_phone'] ?: 'N/A'); ?></span>
-                                    </div>
+                                    <div class="ipw-sec-title">TO</div>
                                     <div class="ipw-recipient-name"><?php echo esc_html(strtoupper($lbl['recipient_name'])); ?></div>
                                     <div class="ipw-recipient-address">
                                         <div><?php echo esc_html(strtoupper($lbl['addr1'])); ?></div>
                                         <?php if (!empty($lbl['addr2'])) : ?>
                                             <div><?php echo esc_html(strtoupper($lbl['addr2'])); ?></div>
                                         <?php endif; ?>
-                                        <div class="ipw-city-pin"><?php echo esc_html(strtoupper(trim("{$lbl['city']}, {$lbl['state']} - {$lbl['recipient_pin']}"))); ?></div>
+                                        <div><?php echo esc_html(strtoupper(trim("{$lbl['city']} {$lbl['state']} {$lbl['recipient_pin']}"))); ?></div>
+                                    </div>
+                                    <div class="ipw-contact-row">
+                                        <div>CONTACT PERSON :<?php echo esc_html(strtoupper($lbl['recipient_name'])); ?></div>
+                                        <div>PHONE :<?php echo esc_html($lbl['recipient_phone'] ?: 'N/A'); ?></div>
                                     </div>
                                 </div>
 
                                 <!-- SECTION 2: FROM & LOGO -->
                                 <div class="ipw-slot-section ipw-section-from">
                                     <div class="ipw-from-left">
-                                        <div class="ipw-from-title">FROM: <strong><?php echo esc_html(strtoupper($lbl['sender_name'])); ?></strong></div>
+                                        <div class="ipw-sec-title">FROM</div>
+                                        <div class="ipw-sender-name"><?php echo esc_html(strtoupper($lbl['sender_name'])); ?></div>
                                         <div class="ipw-from-address">
+                                            <div><?php echo esc_html(strtoupper($lbl['s_line1'])); ?></div>
+                                            <?php if (!empty($lbl['s_line2'])) : ?>
+                                                <div><?php echo esc_html(strtoupper($lbl['s_line2'])); ?></div>
+                                            <?php endif; ?>
                                             <div><?php echo esc_html(strtoupper(trim("{$lbl['s_city']}, {$lbl['s_state']} - {$lbl['s_pin']}"))); ?></div>
-                                            <div>PH: <?php echo esc_html($lbl['s_phone']); ?></div>
+                                            <div>PHONE :<?php echo esc_html($lbl['s_phone']); ?></div>
                                         </div>
                                     </div>
                                     <div class="ipw-from-right">
                                         <?php if ($has_client_logo) : ?>
-                                            <img src="<?php echo esc_url($client_logo_url); ?>" alt="Dhruva Publications" class="ipw-from-logo">
+                                            <div class="ipw-client-logo-box">
+                                                <img src="<?php echo esc_url($client_logo_url); ?>" alt="Dhruva Publications" class="ipw-client-logo-img">
+                                            </div>
                                         <?php endif; ?>
                                     </div>
                                 </div>
 
                                 <!-- SECTION 3: ITEM DETAIL TABLE -->
                                 <div class="ipw-slot-section ipw-section-items">
+                                    <div class="ipw-items-header">ITEM DETAIL</div>
                                     <table class="ipw-items-table">
                                         <thead>
                                             <tr>
-                                                <th class="col-sr">SR</th>
+                                                <th class="col-sr">SR. NO.</th>
                                                 <th class="col-name">NAME OF PRODUCT / SERVICE</th>
-                                                <th class="col-hsn">HSN</th>
+                                                <th class="col-hsn">HSN / SAC</th>
                                                 <th class="col-qty">QTY</th>
                                             </tr>
                                         </thead>
@@ -631,9 +654,9 @@ $show_weight = get_option('ipw_show_weight_on_label', 'no') === 'yes';
                                             $item_count = 0;
                                             foreach ($items as $item_id => $item) : 
                                                 $item_count++;
-                                                if ($item_count > 1) {
-                                                    // Keep within 71mm boundary: show first item and summary of rest
-                                                    echo '<tr><td colspan="4" style="text-align:center; font-style:italic; font-size:5.5px; padding:0.5px;">+ ' . esc_html(count($items) - 1) . ' more item(s) in order</td></tr>';
+                                                if ($item_count > 2) {
+                                                    // Summarize excess items to keep within boundary
+                                                    echo '<tr><td colspan="4" style="text-align:center; font-style:italic; font-size:5.5px; padding:0.5px;">+ ' . esc_html(count($items) - 2) . ' more item(s) in order</td></tr>';
                                                     break;
                                                 }
                                                 $product = $item->get_product();
@@ -653,7 +676,7 @@ $show_weight = get_option('ipw_show_weight_on_label', 'no') === 'yes';
                                                     <td class="col-sr"><?php echo esc_html($sr++); ?></td>
                                                     <td class="col-name"><?php echo esc_html(strtoupper($item->get_name())); ?></td>
                                                     <td class="col-hsn"><?php echo esc_html($hsn); ?></td>
-                                                    <td class="col-qty"><?php echo esc_html(number_format($qty, 0)); ?> NOS</td>
+                                                    <td class="col-qty"><?php echo esc_html(number_format($qty, 2)); ?> NOS</td>
                                                 </tr>
                                             <?php endforeach; ?>
                                         </tbody>
@@ -662,7 +685,7 @@ $show_weight = get_option('ipw_show_weight_on_label', 'no') === 'yes';
 
                                 <!-- SECTION 4: INDIA POST DETAILS & BARCODE -->
                                 <div class="ipw-slot-section ipw-section-post">
-                                    <span class="ipw-post-service-title">INDIAN POST (<?php echo esc_html($lbl['service_display']); ?>)</span>
+                                    <div class="ipw-post-service-title">INDIAN POST (<?php echo esc_html($lbl['service_display']); ?>) 📭</div>
                                     <div class="ipw-contract-line">
                                         CUSTOMER ID - <?php echo esc_html($lbl['customer_id']); ?> CONTRACT ID- <?php echo esc_html($lbl['active_contract_id']); ?>
                                     </div>
@@ -678,9 +701,9 @@ $show_weight = get_option('ipw_show_weight_on_label', 'no') === 'yes';
                                             </div>
                                             <div class="ipw-ord-wt">
                                                 <?php if ($show_weight) : ?>
-                                                    <span>WT: <?php echo esc_html($lbl['weight'] ?: get_option('ipw_default_weight', 250)); ?>g • </span>
+                                                    <div>WT: <?php echo esc_html($lbl['weight'] ?: get_option('ipw_default_weight', 250)); ?>g</div>
                                                 <?php endif; ?>
-                                                <span>ORD #<?php echo esc_html($order->get_order_number()); ?></span>
+                                                <div>ORD #<?php echo esc_html($order->get_order_number()); ?></div>
                                             </div>
                                         </div>
                                     </div>

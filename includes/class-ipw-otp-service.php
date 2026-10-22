@@ -9,6 +9,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+if (!class_exists('IPW_OTP_Service')) {
 class IPW_OTP_Service {
 
     /**
@@ -302,4 +303,5 @@ class IPW_OTP_Service {
 
         return $shipments;
     }
+}
 }

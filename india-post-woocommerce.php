@@ -20,11 +20,21 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
 
-define('IPW_VERSION', '1.2.0');
-define('IPW_PLUGIN_FILE', __FILE__);
-define('IPW_PLUGIN_PATH', plugin_dir_path(__FILE__));
-define('IPW_PLUGIN_URL', plugin_dir_url(__FILE__));
-define('IPW_PLUGIN_BASENAME', plugin_basename(__FILE__));
+if (!defined('IPW_VERSION')) {
+    define('IPW_VERSION', '1.2.0');
+}
+if (!defined('IPW_PLUGIN_FILE')) {
+    define('IPW_PLUGIN_FILE', __FILE__);
+}
+if (!defined('IPW_PLUGIN_PATH')) {
+    define('IPW_PLUGIN_PATH', plugin_dir_path(__FILE__));
+}
+if (!defined('IPW_PLUGIN_URL')) {
+    define('IPW_PLUGIN_URL', plugin_dir_url(__FILE__));
+}
+if (!defined('IPW_PLUGIN_BASENAME')) {
+    define('IPW_PLUGIN_BASENAME', plugin_basename(__FILE__));
+}
 
 // Declare compatibility with WooCommerce HPOS (High-Performance Order Storage)
 add_action('before_woocommerce_init', function () {
@@ -36,6 +46,7 @@ add_action('before_woocommerce_init', function () {
 /**
  * Main Plugin Class
  */
+if (!class_exists('India_Post_WooCommerce')) {
 final class India_Post_WooCommerce {
 
     /**
@@ -161,14 +172,17 @@ final class India_Post_WooCommerce {
         }
     }
 }
+}
 
 /**
  * Global helper function to access plugin instance.
  *
  * @return India_Post_WooCommerce
  */
+if (!function_exists('ipw')) {
 function ipw() {
     return India_Post_WooCommerce::instance();
+}
 }
 
 // Kick off the plugin

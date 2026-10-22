@@ -9,6 +9,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+if (!class_exists('IPW_Activator')) {
 class IPW_Activator {
 
     /**
@@ -126,4 +127,5 @@ class IPW_Activator {
     public static function deactivate() {
         wp_clear_scheduled_hook('ipw_hourly_tracking_sync');
     }
+}
 }

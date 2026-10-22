@@ -9,6 +9,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+if (!class_exists('IPW_Barcode_Helper')) {
 class IPW_Barcode_Helper {
 
     /**
@@ -193,4 +194,5 @@ class IPW_Barcode_Helper {
             esc_html($text)
         );
     }
+}
 }

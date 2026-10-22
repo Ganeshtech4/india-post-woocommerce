@@ -11,6 +11,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+if (!class_exists('IPW_Order_Meta')) {
 class IPW_Order_Meta {
 
     private $plugin;
@@ -691,4 +692,5 @@ class IPW_Order_Meta {
         </section>
         <?php
     }
+}
 }

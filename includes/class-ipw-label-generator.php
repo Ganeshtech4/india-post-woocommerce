@@ -9,6 +9,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+if (!class_exists('IPW_Label_Generator')) {
 class IPW_Label_Generator {
 
     public function __construct() {
@@ -366,4 +367,5 @@ class IPW_Label_Generator {
         include IPW_PLUGIN_PATH . 'templates/shipping-label-thermal.php';
         exit;
     }
+}
 }
