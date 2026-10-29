@@ -83,18 +83,17 @@ class IPW_Barcode_Helper {
      * @return string|WP_Error AWB string or error if range exhausted.
      */
     public static function get_next_available_awb($article_type = '') {
-        $env = get_option('ipw_environment', 'sandbox');
         $prefix = get_option('ipw_awb_prefix', '');
-        if ($env === 'sandbox') {
-            // Official CEPT UAT-8 specifies test series: ET21433001XIN to ET21434000XIN
-            $prefix = 'ET';
-        } elseif (empty($prefix)) {
-            $is_bp = (empty($article_type) && get_option('ipw_default_service', 'BUSINESS_PARCEL') === 'BUSINESS_PARCEL') || 
-                     (!empty($article_type) && ($article_type === 'BUSINESS_PARCEL' || strpos($article_type, 'BP') !== false));
+        $is_bp = (empty($article_type) && get_option('ipw_default_service', 'BUSINESS_PARCEL') === 'BUSINESS_PARCEL') || 
+                 (!empty($article_type) && ($article_type === 'BUSINESS_PARCEL' || strpos($article_type, 'BP') !== false));
+
+        // Regulate UPU S10 Service Code: BP for Business Parcel, ET for Speed Post
+        if (empty($prefix)) {
             $prefix = $is_bp ? 'BP' : 'ET';
-        } elseif ($prefix === 'ET' && ($article_type === 'BUSINESS_PARCEL' || strpos($article_type, 'BP') !== false)) {
-            // When booking Business Parcel and prefix is default ET, use BP for proper UPU parcel coding
+        } elseif ($is_bp && $prefix === 'ET') {
             $prefix = 'BP';
+        } elseif (!$is_bp && $prefix === 'BP') {
+            $prefix = 'ET';
         }
         $start       = intval(get_option('ipw_awb_counter_start', 21433001));
         $end         = intval(get_option('ipw_awb_counter_end', 21434000));
