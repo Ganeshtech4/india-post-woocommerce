@@ -3,7 +3,7 @@
  * Plugin Name: India Post Shipping & Tracking for WooCommerce
  * Plugin URI: https://dhuruvapublications.com
  * Description: Lightweight, enterprise-grade India Post Business API integration for WooCommerce. Features shipment booking, consignment barcode allocation (UPU S10), thermal/A6 shipping label generation, OTP-verified customer mobile tracking, and India Post Self-Service Portal styled admin dashboard.
- * Version: 1.2.0
+ * Version: 1.3.0
  * Author: Dhruva Publications / Antigravity
  * Author URI: https://dhuruvapublications.com
  * Text Domain: india-post-woocommerce
@@ -21,7 +21,7 @@ if (!defined('ABSPATH')) {
 }
 
 if (!defined('IPW_VERSION')) {
-    define('IPW_VERSION', '1.2.0');
+    define('IPW_VERSION', '1.3.0');
 }
 if (!defined('IPW_PLUGIN_FILE')) {
     define('IPW_PLUGIN_FILE', __FILE__);
