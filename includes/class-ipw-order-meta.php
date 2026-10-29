@@ -492,7 +492,7 @@ class IPW_Order_Meta {
             'ack'                      => 'FALSE',
             'reg'                      => 'FALSE',
             'otp'                      => ($article_type === '24_SPP_PARSPL') ? 'TRUE' : 'FALSE',
-            'bulk_reference'           => 'ORD_' . $order_id,
+            'bulk_reference'           => 'ORD_' . $order_id . '_' . substr(time(), -5),
         );
 
         $api = new IPW_API_Client();
