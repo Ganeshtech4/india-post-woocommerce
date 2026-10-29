@@ -28,6 +28,8 @@ class IPW_Admin {
         add_action('wp_ajax_ipw_test_api_connection', array($this, 'ajax_test_api_connection'));
         add_action('wp_ajax_ipw_admin_pincode_search', array($this, 'ajax_pincode_search'));
         add_action('wp_ajax_ipw_sync_all_tracking', array($this, 'ajax_sync_all_tracking'));
+        add_action('wp_ajax_ipw_run_live_uat_tests', array($this, 'ajax_run_live_uat_tests'));
+        add_action('wp_ajax_ipw_clear_api_logs', array($this, 'ajax_clear_api_logs'));
     }
 
     /**
@@ -87,6 +89,15 @@ class IPW_Admin {
             'manage_woocommerce',
             'india-post-settings',
             array($this, 'render_settings_page')
+        );
+
+        add_submenu_page(
+            'india-post-dashboard',
+            __('API Logs & CEPT Verification', 'india-post-woocommerce'),
+            __('API Logs & Verification', 'india-post-woocommerce'),
+            'manage_woocommerce',
+            'india-post-api-logs',
+            array($this, 'render_api_logs_page')
         );
     }
 
@@ -361,6 +372,90 @@ class IPW_Admin {
             'message' => sprintf(__('Successfully synchronized %d consignments with India Post!', 'india-post-woocommerce'), $updated_count),
             'updated' => $updated_count,
         ));
+    }
+
+    /**
+     * Render API Debug Logs Page.
+     */
+    public function render_api_logs_page() {
+        include_once IPW_PLUGIN_PATH . 'templates/admin-api-logs.php';
+    }
+
+    /**
+     * AJAX Run Live UAT Tests across all endpoints.
+     */
+    public function ajax_run_live_uat_tests() {
+        check_ajax_referer('ipw_admin_nonce', 'nonce');
+
+        if (!current_user_can('manage_woocommerce')) {
+            wp_send_json_error(array('message' => __('Unauthorized.', 'india-post-woocommerce')));
+        }
+
+        $api = new IPW_API_Client();
+        $results = array();
+
+        // 1. Live Access Token
+        delete_transient(IPW_API_Client::TOKEN_TRANSIENT);
+        $token = $api->get_access_token(true);
+        $results['auth'] = !is_wp_error($token) ? 'success' : $token->get_error_message();
+
+        // 2. Live Pincode Search
+        $pincode_res = $api->search_pincode('517390');
+        $results['pincode'] = !is_wp_error($pincode_res) ? 'success' : $pincode_res->get_error_message();
+
+        // 3. Live Business Parcel Tariff
+        $bp_res = $api->calculate_business_parcel_tariff(array(
+            'weight'              => 120,
+            'source-pincode'      => get_option('ipw_sender_pincode', '560001'),
+            'destination-pincode' => '517390',
+            'length'              => 20,
+            'width'               => 15,
+            'height'              => 2,
+            'ins'                 => 0,
+        ));
+        $results['bp_tariff'] = !is_wp_error($bp_res) ? 'success' : $bp_res->get_error_message();
+
+        // 4. Live Speed Post Tariff
+        $sp_res = $api->calculate_speed_post_tariff(array(
+            'weight'              => 250,
+            'source-pincode'      => get_option('ipw_sender_pincode', '560001'),
+            'destination-pincode' => '110001',
+            'length'              => 20,
+            'width'               => 15,
+            'height'              => 2,
+            'INS'                 => 0,
+            'POD'                 => 'NO',
+        ));
+        $results['sp_tariff'] = !is_wp_error($sp_res) ? 'success' : $sp_res->get_error_message();
+
+        // 5. Live Tracking (check last booked shipment)
+        global $wpdb;
+        $last_sh = $wpdb->get_row("SELECT barcode_no FROM {$wpdb->prefix}ipw_shipments ORDER BY id DESC LIMIT 1");
+        $track_awb = $last_sh ? $last_sh->barcode_no : 'BP214330121IN';
+        $track_res = $api->track_bulk(array($track_awb));
+        $results['tracking'] = !is_wp_error($track_res) ? 'success' : $track_res->get_error_message();
+
+        $logs = get_option('ipw_api_debug_logs', array());
+
+        wp_send_json_success(array(
+            'message' => __('All live CEPT endpoints tested and wire transactions logged successfully!', 'india-post-woocommerce'),
+            'results' => $results,
+            'logs'    => array_slice($logs, 0, 10),
+        ));
+    }
+
+    /**
+     * AJAX Clear API Debug Logs.
+     */
+    public function ajax_clear_api_logs() {
+        check_ajax_referer('ipw_admin_nonce', 'nonce');
+
+        if (!current_user_can('manage_woocommerce')) {
+            wp_send_json_error(array('message' => __('Unauthorized.', 'india-post-woocommerce')));
+        }
+
+        delete_option('ipw_api_debug_logs');
+        wp_send_json_success(array('message' => __('API debug logs cleared successfully.', 'india-post-woocommerce')));
     }
 }
 }

@@ -396,18 +396,24 @@ class IPW_Order_Meta {
             }
         }
 
-        // Determine Contract ID based on article type
-        $contract_id = get_option('ipw_contract_id_sp', '41585456');
-        if (strpos($article_type, 'BP') !== false || $article_type === 'BUSINESS_PARCEL') {
-            $contract_id = get_option('ipw_contract_id_bp', '41367422');
-        } elseif ($article_type === '24_SPEEDPOST_DOC') {
-            $contract_id = get_option('ipw_contract_id_24sp_doc', '41469430');
-        } elseif ($article_type === '24_SPP_PARSPL') {
-            $contract_id = get_option('ipw_contract_id_24spp_par', '41918281');
-        } elseif ($article_type === '48_SPEEDPOST_DOC') {
-            $contract_id = get_option('ipw_contract_id_48sp_doc', '41471113');
+        // Determine Contract ID based on environment and article type
+        $env = get_option('ipw_environment', 'sandbox');
+        if ($env === 'sandbox') {
+            // Official CEPT UAT-8 specifications:
+            // Customer id: 3000064781, contract_id: 41585456 for all article types in sandbox
+            $contract_id = '41585456';
+        } else {
+            $contract_id = get_option('ipw_contract_id_sp', '41585456');
+            if (strpos($article_type, 'BP') !== false || $article_type === 'BUSINESS_PARCEL') {
+                $contract_id = get_option('ipw_contract_id_bp', '41585456');
+            } elseif ($article_type === '24_SPEEDPOST_DOC') {
+                $contract_id = get_option('ipw_contract_id_24sp_doc', '41469430');
+            } elseif ($article_type === '24_SPP_PARSPL') {
+                $contract_id = get_option('ipw_contract_id_24spp_par', '41918281');
+            } elseif ($article_type === '48_SPEEDPOST_DOC') {
+                $contract_id = get_option('ipw_contract_id_48sp_doc', '41471113');
+            }
         }
-
         // Build Payload according to official India Post specs (doc_dump.txt lines 996-1076)
         $customer_id = get_option('ipw_customer_id', '3000064781');
         $office_id   = intval(get_option('ipw_default_office_id', '21260024'));

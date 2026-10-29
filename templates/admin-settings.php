@@ -101,6 +101,18 @@ $env = get_option('ipw_environment', 'sandbox');
                         <?php esc_html_e('Allows full WooCommerce order booking and tracking testing even if India Post test servers are in maintenance or static IP is awaiting whitelist approval.', 'india-post-woocommerce'); ?>
                     </p>
                 </div>
+
+                <div style="margin-top:20px; padding:16px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; display:flex; flex-direction:column; gap:10px;">
+                    <div style="display:flex; align-items:center; gap:12px;">
+                        <button type="button" class="button button-secondary" id="ipw-btn-test-connection" style="font-weight:600;">
+                            ⚡ <?php esc_html_e('Test API Connection', 'india-post-woocommerce'); ?>
+                        </button>
+                        <span class="description">
+                            <?php esc_html_e('Pings the CEPT sandbox login API using your saved credentials to verify IP whitelisting & token generation.', 'india-post-woocommerce'); ?>
+                        </span>
+                    </div>
+                    <div id="ipw-connection-test-result" style="display:none;"></div>
+                </div>
             </div>
         </div>
 
@@ -121,8 +133,8 @@ $env = get_option('ipw_environment', 'sandbox');
                     <tr>
                         <th scope="row"><label for="ipw_contract_id_bp"><?php esc_html_e('Business Parcel Contract ID', 'india-post-woocommerce'); ?></label></th>
                         <td>
-                            <input type="text" name="ipw_contract_id_bp" id="ipw_contract_id_bp" value="<?php echo esc_attr(get_option('ipw_contract_id_bp', '41367422')); ?>" class="regular-text">
-                            <p class="description"><?php esc_html_e('Business Parcel Contract (e.g. 41367422)', 'india-post-woocommerce'); ?></p>
+                            <input type="text" name="ipw_contract_id_bp" id="ipw_contract_id_bp" value="<?php echo esc_attr(get_option('ipw_contract_id_bp', '41585456')); ?>" class="regular-text">
+                            <p class="description"><?php esc_html_e('Business Parcel Contract (Default: 41585456 for CEPT Sandbox / UAT testing across all article types)', 'india-post-woocommerce'); ?></p>
                         </td>
                     </tr>
                     <tr>

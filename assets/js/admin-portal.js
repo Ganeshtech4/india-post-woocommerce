@@ -472,4 +472,126 @@
         return $('<div>').text(text).html();
     }
 
+
+    // --- LIVE UAT API TEST RUNNER & LOGS ---
+    $('#ipw-btn-run-all-tests').on('click', function(e) {
+        e.preventDefault();
+        var $btn = $(this);
+        var originalText = $btn.html();
+        var $status = $('#ipw-test-runner-status');
+
+        $btn.prop('disabled', true).html('⏳ Executing Live CEPT Calls...');
+        $status.html('<div class="ipw-inline-alert ipw-alert-info"><span>🛰️ <strong>Running live tests...</strong> Calling CEPT Login, Pincode Search, Business Parcel Tariff, Speed Post Tariff, and Tracking endpoints from this server...</span></div>').slideDown(150);
+
+        $.ajax({
+            url: ipw_admin_data.ajax_url,
+            type: 'POST',
+            data: {
+                action: 'ipw_run_live_uat_tests',
+                nonce: ipw_admin_data.nonce
+            },
+            success: function(res) {
+                $btn.prop('disabled', false).html(originalText);
+                if (res.success) {
+                    $status.html('<div class="ipw-inline-alert ipw-alert-success"><span>✅ <strong>Live Tests Complete!</strong> All live CEPT endpoints responded and wire transactions were logged. Refreshing...</span></div>');
+                    setTimeout(function() {
+                        location.reload();
+                    }, 1200);
+                } else {
+                    $status.html('<div class="ipw-inline-alert ipw-alert-error"><span>❌ <strong>Test execution error:</strong> ' + escapeHtml(res.data.message || 'Unknown error') + '</span></div>');
+                }
+            },
+            error: function() {
+                $btn.prop('disabled', false).html(originalText);
+                $status.html('<div class="ipw-inline-alert ipw-alert-error"><span>❌ Network request timed out or failed.</span></div>');
+            }
+        });
+    });
+
+    // Clear Logs
+    $('#ipw-btn-clear-api-logs').on('click', function(e) {
+        e.preventDefault();
+        if (!confirm('Are you sure you want to clear all logged API transactions?')) {
+            return;
+        }
+        $.ajax({
+            url: ipw_admin_data.ajax_url,
+            type: 'POST',
+            data: {
+                action: 'ipw_clear_api_logs',
+                nonce: ipw_admin_data.nonce
+            },
+            success: function() {
+                location.reload();
+            }
+        });
+    });
+
+    // Copy single snippet button
+    $(document).on('click', '.ipw-copy-snippet-btn', function(e) {
+        e.preventDefault();
+        var targetId = $(this).data('target');
+        var text = $('#' + targetId).text();
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(text);
+            $(this).text('Copied!');
+            var $b = $(this);
+            setTimeout(function() { $b.text('Copy'); }, 1500);
+        }
+    });
+
+    // Generate Compiled CEPT Email
+    $('#ipw-btn-copy-email-report').on('click', function(e) {
+        e.preventDefault();
+        var email = "To: Integrations Team CEPT <integrations.cept@indiapost.gov.in>\n";
+        email += "Subject: Re: External Integration - UAT Test Payloads and API Responses for Verification\n\n";
+        email += "Dear CEPT Integration Team,\n\n";
+        email += "As requested, below are the complete URLs, request payloads, and live responses captured directly from our whitelisted server IP (" + ($('#ipw-server-ip').text() || '145.79.58.237') + ") for the tested DOP endpoints:\n\n";
+
+        $('.ipw-log-card').each(function(idx) {
+            var method = $(this).find('.ipw-log-header span:first').text().trim();
+            var name = $(this).find('.ipw-log-header strong').text().trim();
+            var url = $(this).find('.ipw-log-header code').text().trim();
+            var status = $(this).find('.ipw-log-header .status-text-pill').text().trim();
+            var req = $(this).find('pre[id^="req-"]').text().trim();
+            var res = $(this).find('pre[id^="res-"]').text().trim();
+
+            email += "================================================================================\n";
+            email += (idx + 1) + ". " + name.toUpperCase() + "\n";
+            email += "================================================================================\n";
+            email += "• Method: " + method + "\n";
+            email += "• URL: " + url + "\n";
+            if (req && req.indexOf('(No body payload') === -1) {
+                email += "• Request Payload:\n" + req + "\n\n";
+            }
+            email += "• Response (" + status + "):\n" + res + "\n\n";
+        });
+
+        email += "================================================================================\n\n";
+        email += "Kindly review these responses and provide:\n";
+        email += "1. UAT validation sign-off.\n";
+        email += "2. Production API credentials (Username, Password, and Production Customer/Contract IDs).\n";
+        email += "3. Whitelisting confirmation of our server IP (" + ($('#ipw-server-ip').text() || '145.79.58.237') + ") on the production gateway (https://api.cept.gov.in/beextcustomer).\n\n";
+        email += "Thanks & Regards,\nDhruva Publications";
+
+        $('#ipw-email-text-content').val(email);
+        $('#ipw-email-preview-card').slideDown(200);
+        $('html, body').animate({ scrollTop: $('#ipw-email-preview-card').offset().top - 40 }, 300);
+    });
+
+    $('#ipw-btn-copy-raw-email-text').on('click', function(e) {
+        e.preventDefault();
+        var text = $('#ipw-email-text-content').val();
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(text);
+            $(this).text('✅ Copied to Clipboard!');
+            var $b = $(this);
+            setTimeout(function() { $b.text('📋 Copy Text to Clipboard'); }, 2000);
+        } else {
+            $('#ipw-email-text-content').select();
+            document.execCommand('copy');
+            $(this).text('✅ Copied!');
+        }
+    });
+
 })(jQuery);

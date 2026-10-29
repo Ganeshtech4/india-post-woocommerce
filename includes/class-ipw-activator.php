@@ -85,7 +85,7 @@ class IPW_Activator {
             'prod_password'             => '',
             'customer_id'               => '3000064781',
             'contract_id_sp'            => '41585456', // Speed Post
-            'contract_id_bp'            => '41367422', // Business Parcel
+            'contract_id_bp'            => '41585456', // Business Parcel
             'contract_id_24sp_doc'      => '41469430',
             'contract_id_24spp_par'     => '41918281',
             'contract_id_48sp_doc'      => '41471113',

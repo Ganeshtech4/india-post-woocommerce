@@ -16,6 +16,51 @@ if (!class_exists('IPW_API_Client')) {
 class IPW_API_Client {
 
     /**
+     * Store API request and response for CEPT verification & debugging.
+     */
+    public static function log_api_call($name, $method, $url, $headers, $payload, $response_code, $response_body) {
+        $logs = get_option('ipw_api_debug_logs', array());
+        if (!is_array($logs)) {
+            $logs = array();
+        }
+
+        // Mask password in payload if login
+        if (is_array($payload)) {
+            if (isset($payload['password'])) {
+                $payload['password'] = 'Dop@1234';
+            }
+        } elseif (is_string($payload) && strpos($payload, '"password"') !== false) {
+            $payload = preg_replace('/"password"\s*:\s*"[^"]*"/', '"password": "Dop@1234"', $payload);
+        }
+
+        // Mask raw bearer token in headers
+        if (isset($headers['Authorization']) && strpos($headers['Authorization'], 'Bearer ') === 0) {
+            $raw_tok = str_replace('Bearer ', '', $headers['Authorization']);
+            $headers['Authorization'] = 'Bearer ' . substr($raw_tok, 0, 15) . '...' . substr($raw_tok, -6);
+        }
+
+        $entry = array(
+            'id'            => uniqid('log_'),
+            'timestamp'     => current_time('mysql'),
+            'name'          => $name,
+            'method'        => strtoupper($method),
+            'url'           => $url,
+            'headers'       => $headers,
+            'payload'       => is_array($payload) ? wp_json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) : $payload,
+            'response_code' => intval($response_code),
+            'response_body' => is_string($response_body) ? $response_body : wp_json_encode($response_body, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES),
+        );
+
+        array_unshift($logs, $entry);
+        if (count($logs) > 30) {
+            $logs = array_slice($logs, 0, 30);
+        }
+
+        update_option('ipw_api_debug_logs', $logs, false);
+    }
+
+
+    /**
      * Cache key for access token.
      */
     const TOKEN_TRANSIENT = 'ipw_api_access_token';
@@ -126,6 +171,7 @@ class IPW_API_Client {
         $status_code = wp_remote_retrieve_response_code($response);
         $res_body    = wp_remote_retrieve_body($response);
         $data        = json_decode($res_body, true);
+        self::log_api_call('Access Token API', 'POST', $url, array('Content-Type' => 'application/json'), array('username' => $creds['username'], 'password' => 'Dop@1234'), $status_code, $res_body);
 
         if ($status_code === 200 && !empty($data['success']) && !empty($data['data']['access_token'])) {
             $token = $data['data']['access_token'];
@@ -383,6 +429,51 @@ class IPW_API_Client {
      * @param array $args
      * @return array|WP_Error
      */
+        /**
+     * Calculate Business Parcel Tariff
+     *
+     * @param array $args
+     * @return array|WP_Error
+     */
+    public function calculate_business_parcel_tariff($args = array()) {
+        $token = $this->get_access_token();
+        if (is_wp_error($token)) {
+            return $token;
+        }
+
+        $defaults = array(
+            'product-code'        => 'BP',
+            'weight'              => 500,
+            'source-pincode'      => get_option('ipw_sender_pincode', '560001'),
+            'destination-pincode' => '517390',
+            'length'              => 20,
+            'width'               => 15,
+            'height'              => 2,
+            'ins'                 => 0,
+        );
+        $query_args = wp_parse_args($args, $defaults);
+        $url = add_query_arg($query_args, $this->get_base_url() . '/v1/business-parcel-tariff/calculate');
+
+        $response = wp_remote_get($url, array(
+            'headers'   => array(
+                'Authorization' => 'Bearer ' . $token,
+                'Content-Type'  => 'application/json',
+            ),
+            'timeout'   => 15,
+            'sslverify' => false,
+        ));
+
+        $status_code = wp_remote_retrieve_response_code($response);
+        $body = wp_remote_retrieve_body($response);
+        self::log_api_call('Business Parcel Tariff API', 'GET', $url, array('Authorization' => 'Bearer ' . substr($token, 0, 10) . '...'), null, $status_code, $body);
+
+        if (is_wp_error($response)) {
+            return $response;
+        }
+
+        return json_decode($body, true);
+    }
+
     public function calculate_speed_post_tariff($args) {
         $token = $this->get_access_token();
         if (is_wp_error($token)) {
@@ -416,7 +507,9 @@ class IPW_API_Client {
             return $response;
         }
 
+        $status_code = wp_remote_retrieve_response_code($response);
         $body = wp_remote_retrieve_body($response);
+        self::log_api_call('Speed Post Tariff API', 'GET', $url, array('Authorization' => 'Bearer ' . substr($token, 0, 10) . '...'), null, $status_code, $body);
         return json_decode($body, true);
     }
 
@@ -464,8 +557,10 @@ class IPW_API_Client {
             return $response;
         }
 
+        $status_code = wp_remote_retrieve_response_code($response);
         $body = wp_remote_retrieve_body($response);
         $data = json_decode($body, true);
+        self::log_api_call('Booking API (process-articles)', 'POST', $url, array('Authorization' => 'Bearer ' . substr($token, 0, 10) . '...', 'Content-Type' => 'application/json'), $payload, $status_code, $body);
 
         if (!$data) {
             return new WP_Error('ipw_invalid_response', __('Received empty or invalid response from India Post Booking API.', 'india-post-woocommerce'));
@@ -564,8 +659,10 @@ class IPW_API_Client {
             return $response;
         }
 
+        $status_code = wp_remote_retrieve_response_code($response);
         $body = wp_remote_retrieve_body($response);
         $data = json_decode($body, true);
+        self::log_api_call('Bulk Tracking API', 'POST', $url, array('Authorization' => 'Bearer ' . substr($token, 0, 10) . '...', 'Content-Type' => 'application/json'), $payload, $status_code, $body);
 
         if (!is_array($data)) {
             return new WP_Error('ipw_tracking_error', __('Invalid response from India Post Tracking API.', 'india-post-woocommerce'));
