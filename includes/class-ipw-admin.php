@@ -391,6 +391,9 @@ class IPW_Admin {
             wp_send_json_error(array('message' => __('Unauthorized.', 'india-post-woocommerce')));
         }
 
+        // Clear previous debug logs so this test run is 100% fresh with zero duplicates
+        delete_option('ipw_api_debug_logs');
+
         $api = new IPW_API_Client();
         $results = array();
 
@@ -404,19 +407,7 @@ class IPW_Admin {
         $pincode_res = $api->search_pincode($test_pin);
         $results['pincode'] = !is_wp_error($pincode_res) ? 'success' : $pincode_res->get_error_message();
 
-        // 3. Live Business Parcel Tariff
-        $bp_res = $api->calculate_business_parcel_tariff(array(
-            'weight'              => 120,
-            'source-pincode'      => get_option('ipw_sender_pincode', '560001'),
-            'destination-pincode' => '517390',
-            'length'              => 20,
-            'width'               => 15,
-            'height'              => 2,
-            'ins'                 => 0,
-        ));
-        $results['bp_tariff'] = !is_wp_error($bp_res) ? 'success' : $bp_res->get_error_message();
-
-        // 4. Live Speed Post Tariff
+        // 3. Live Speed Post Tariff
         $sp_res = $api->calculate_speed_post_tariff(array(
             'weight'              => 250,
             'source-pincode'      => get_option('ipw_sender_pincode', '560001'),
@@ -429,11 +420,84 @@ class IPW_Admin {
         ));
         $results['sp_tariff'] = !is_wp_error($sp_res) ? 'success' : $sp_res->get_error_message();
 
-        // 5. Live Tracking (check last booked shipment)
-        global $wpdb;
-        $last_sh = $wpdb->get_row("SELECT barcode_no FROM {$wpdb->prefix}ipw_shipments ORDER BY id DESC LIMIT 1");
-        $track_awb = $last_sh ? $last_sh->barcode_no : 'BP214330121IN';
-        $track_res = $api->track_bulk(array($track_awb));
+        // 4. Live Business Parcel Tariff
+        $bp_res = $api->calculate_business_parcel_tariff(array(
+            'weight'              => 120,
+            'source-pincode'      => get_option('ipw_sender_pincode', '560001'),
+            'destination-pincode' => '517390',
+            'length'              => 20,
+            'width'               => 15,
+            'height'              => 2,
+            'ins'                 => 0,
+        ));
+        $results['bp_tariff'] = !is_wp_error($bp_res) ? 'success' : $bp_res->get_error_message();
+
+        // 5. Live Booking API Test (allocates a guaranteed fresh, unused AWB)
+        $test_awb = IPW_Barcode_Helper::get_next_available_awb('BUSINESS_PARCEL');
+        $cust_id = (get_option('ipw_environment', 'sandbox') === 'sandbox') ? '3000064781' : get_option('ipw_customer_id', '1156062849');
+        $contract_id = (get_option('ipw_environment', 'sandbox') === 'sandbox') ? '41585456' : get_option('ipw_contract_id');
+        $bulk_ref = 'UAT_' . gmdate('YmdHis');
+
+        $test_article = array(
+            'bulk_customer_id'         => $cust_id,
+            'contract_id'              => $contract_id,
+            'barcode_no'               => $test_awb,
+            'pickup_or_dropoff'        => 'dropoff',
+            'pickup_dropoff_office_id' => 21260024,
+            'article_type'             => 'BUSINESS_PARCEL',
+            'physical_weight'          => 120,
+            'shape_of_article'         => 'NROL',
+            'length'                   => '20',
+            'breadth_diameter'         => '15',
+            'height'                   => '2',
+            'priority_flag'            => 'FALSE',
+            'delivery_instruction'     => '',
+            'delivery_slot'            => '',
+            'instruction_rts'          => 'RTS',
+            'sender_name'              => get_option('ipw_sender_name', 'DHRUVA PUBLICATIONS'),
+            'sender_company'           => 'Dhruva Publications',
+            'sender_add_line_1'        => 'Main Office Road',
+            'sender_add_line_2'        => 'Commercial Hub',
+            'sender_city'              => 'Bengaluru',
+            'sender_state'             => 'Karnataka',
+            'sender_pincode'           => get_option('ipw_sender_pincode', '560001'),
+            'sender_emailid'           => get_option('ipw_sender_email', 'info@dhruvapublications.com'),
+            'sender_alt_contact'       => '',
+            'sender_kyc'               => '',
+            'sender_tax_reference'     => '',
+            'receiver_name'            => 'CEPT UAT Test Receiver',
+            'receiver_company'         => 'Dhruva Publications',
+            'receiver_add_line_1'      => 'Sample Destination Line 1',
+            'receiver_add_line_2'      => 'Civil Lines',
+            'receiver_city'            => 'New Delhi',
+            'receiver_state'           => 'Delhi',
+            'receiver_pincode'         => '110001',
+            'receiver_emailid'         => 'integrations.cept@indiapost.gov.in',
+            'receiver_alt_contact'     => '',
+            'receiver_kyc'             => '',
+            'receiver_tax_reference'   => '',
+            'alt_address_flag'         => 'FALSE',
+            'pickup_address_flag'      => 'FALSE',
+            'drop_off_pincode'         => get_option('ipw_sender_pincode', '560001'),
+            'sender_mobile_no'         => get_option('ipw_sender_phone', '9876543210'),
+            'receiver_mobile_no'       => '9876543210',
+            'prepayment_code'          => '',
+            'value_of_prepayment'      => 0,
+            'codr_cod'                 => '',
+            'value_for_codr_cod'       => 0,
+            'insurance_type'           => '',
+            'value_of_insurance'       => 0,
+            'ack'                      => 'FALSE',
+            'reg'                      => 'FALSE',
+            'otp'                      => 'FALSE',
+            'bulk_reference'           => $bulk_ref,
+        );
+
+        $book_res = $api->book_articles($cust_id, array($test_article));
+        $results['booking'] = !is_wp_error($book_res) ? 'success' : $book_res->get_error_message();
+
+        // 6. Live Tracking (track the fresh article just booked)
+        $track_res = $api->track_bulk(array($test_awb));
         $results['tracking'] = !is_wp_error($track_res) ? 'success' : $track_res->get_error_message();
 
         $logs = get_option('ipw_api_debug_logs', array());

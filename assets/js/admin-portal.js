@@ -544,11 +544,14 @@
     $('#ipw-btn-copy-email-report').on('click', function(e) {
         e.preventDefault();
         var email = "To: Integrations Team CEPT <integrations.cept@indiapost.gov.in>\n";
-        email += "Subject: Re: External Integration - UAT Test Payloads and API Responses for Verification\n\n";
+        email += "Subject: Re: External Integration - UAT Test Results for Booking API and Pincode Search API\n\n";
         email += "Dear CEPT Integration Team,\n\n";
         email += "As requested, below are the complete URLs, request payloads, and live responses captured directly from our whitelisted server IP (" + ($('#ipw-server-ip').text() || '145.79.58.237') + ") for the tested DOP endpoints:\n\n";
 
-        $('.ipw-log-card').each(function(idx) {
+        var seenApis = {};
+        var uniqueCards = [];
+
+        $('.ipw-log-card').each(function() {
             var method = $(this).find('.ipw-log-header span:first').text().trim();
             var name = $(this).find('.ipw-log-header strong').text().trim();
             var url = $(this).find('.ipw-log-header code').text().trim();
@@ -556,23 +559,63 @@
             var req = $(this).find('pre[id^="req-"]').text().trim();
             var res = $(this).find('pre[id^="res-"]').text().trim();
 
-            email += "================================================================================\n";
-            email += (idx + 1) + ". " + name.toUpperCase() + "\n";
-            email += "================================================================================\n";
-            email += "• Method: " + method + "\n";
-            email += "• URL: " + url + "\n";
-            if (req && req.indexOf('(No body payload') === -1) {
-                email += "• Request Payload:\n" + req + "\n\n";
+            // Skip duplicate error transactions or non-200 attempts
+            if (res.indexOf('Duplicate article') !== -1 || res.indexOf('"success_count":0') !== -1) {
+                return;
             }
-            email += "• Response (" + status + "):\n" + res + "\n\n";
+
+            var key = name.toUpperCase();
+            if (!seenApis[key]) {
+                seenApis[key] = true;
+                uniqueCards.push({
+                    method: method,
+                    name: name,
+                    url: url,
+                    status: status,
+                    req: req,
+                    res: res
+                });
+            }
+        });
+
+        // Standard display ordering
+        var order = [
+            'ACCESS TOKEN API',
+            'PINCODE SEARCH API',
+            'SPEED POST TARIFF API',
+            'BUSINESS PARCEL TARIFF API',
+            'BOOKING API (PROCESS-ARTICLES)',
+            'BULK TRACKING API'
+        ];
+
+        uniqueCards.sort(function(a, b) {
+            var idxA = order.indexOf(a.name.toUpperCase());
+            var idxB = order.indexOf(b.name.toUpperCase());
+            if (idxA === -1) idxA = 99;
+            if (idxB === -1) idxB = 99;
+            return idxA - idxB;
+        });
+
+        $.each(uniqueCards, function(idx, card) {
+            email += "================================================================================\n";
+            email += (idx + 1) + ". " + card.name.toUpperCase() + "\n";
+            email += "================================================================================\n";
+            email += "• Method: " + card.method + "\n";
+            email += "• URL: " + card.url + "\n";
+            if (card.req && card.req.indexOf('(No body payload') === -1) {
+                email += "• Request Payload:\n" + card.req + "\n\n";
+            }
+            email += "• Response (" + card.status + "):\n" + card.res + "\n\n";
         });
 
         email += "================================================================================\n\n";
-        email += "Kindly review these responses and provide:\n";
-        email += "1. UAT validation sign-off.\n";
-        email += "2. Production API credentials (Username, Password, and Production Customer/Contract IDs).\n";
-        email += "3. Whitelisting confirmation of our server IP (" + ($('#ipw-server-ip').text() || '145.79.58.237') + ") on the production gateway (https://api.cept.gov.in/beextcustomer).\n\n";
-        email += "Thanks & Regards,\nDhruva Publications";
+        email += "Our Production Bulk Customer ID is: 1156062849\n\n";
+        email += "All requested endpoints (Tariff Calculation, Bulk Tracking, Booking, and Pincode Search) have now been verified with successful live 200 responses.\n\n";
+        email += "Kindly provide:\n";
+        email += "1. Final UAT sign-off.\n";
+        email += "2. Production API credentials (Username, Password, and Production Contract ID).\n";
+        email += "3. Production Base URL.\n\n";
+        email += "Warm regards,\nDhruva Publications";
 
         $('#ipw-email-text-content').val(email);
         $('#ipw-email-preview-card').slideDown(200);
