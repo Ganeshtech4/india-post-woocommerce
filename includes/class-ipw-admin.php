@@ -400,7 +400,8 @@ class IPW_Admin {
         $results['auth'] = !is_wp_error($token) ? 'success' : $token->get_error_message();
 
         // 2. Live Pincode Search
-        $pincode_res = $api->search_pincode('517390');
+        $test_pin = get_option('ipw_sender_pincode', '560001');
+        $pincode_res = $api->search_pincode($test_pin);
         $results['pincode'] = !is_wp_error($pincode_res) ? 'success' : $pincode_res->get_error_message();
 
         // 3. Live Business Parcel Tariff

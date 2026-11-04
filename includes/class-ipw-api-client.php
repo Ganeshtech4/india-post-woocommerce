@@ -312,9 +312,11 @@ class IPW_API_Client {
                     'sslverify' => false,
                 ));
                 $body = wp_remote_retrieve_body($response);
+                $status_code = wp_remote_retrieve_response_code($response);
                 $data = json_decode($body, true);
             }
         }
+        self::log_api_call('Pincode Search API', 'GET', $url, array('Authorization' => 'Bearer ' . substr($token, 0, 10) . '...'), null, $status_code, $body);
 
         if (is_array($data) && !empty($data)) {
             return $data;
