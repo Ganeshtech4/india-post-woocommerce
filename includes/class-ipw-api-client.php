@@ -522,14 +522,19 @@ class IPW_API_Client {
      * @param array $articles Array of article payload objects.
      * @return array|WP_Error
      */
-    public function book_articles($articles) {
+    public function book_articles($articles, $articles_arg2 = null) {
         $token = $this->get_access_token();
         if (is_wp_error($token)) {
             return $token;
         }
 
-        $creds = $this->get_credentials();
-        $customer_id = !empty($creds['customer_id']) ? $creds['customer_id'] : '3000064781';
+        if (is_string($articles) && is_array($articles_arg2)) {
+            $customer_id = $articles;
+            $articles = $articles_arg2;
+        } else {
+            $creds = $this->get_credentials();
+            $customer_id = !empty($creds['customer_id']) ? $creds['customer_id'] : '3000064781';
+        }
         $url = $this->get_base_url() . '/process-articles/' . rawurlencode($customer_id);
 
         $payload = array(

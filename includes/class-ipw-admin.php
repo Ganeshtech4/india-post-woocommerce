@@ -493,7 +493,7 @@ class IPW_Admin {
             'bulk_reference'           => $bulk_ref,
         );
 
-        $book_res = $api->book_articles($cust_id, array($test_article));
+        $book_res = $api->book_articles(array($test_article));
         $results['booking'] = !is_wp_error($book_res) ? 'success' : $book_res->get_error_message();
 
         // 6. Live Tracking (track the fresh article just booked)
